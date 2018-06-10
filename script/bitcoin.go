@@ -91,7 +91,7 @@ func open(path string) io.Writer {
 }
 
 func run(args ...string) string {
-	out, err := exec.Command("/home/g/dev/bitcoind/bitcoin-0.16.0/bin/bitcoin-cli", args...).CombinedOutput()
+	out, err := exec.Command("/home/g/zcash/zcash-1.1.1/bin/zcash-cli", args...).CombinedOutput()
 	if err != nil {
 		panic(err)
 	}
