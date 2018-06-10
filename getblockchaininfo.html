@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Bitcoin Core RPC Docs - getblockchaininfo">
+    <meta name="description" content="Zcash 1.1.1 RPC Docs - getblockchaininfo">
     <meta name="author" content="">
 
-    <title>getblockchaininfo - Bitcoin Core RPC Docs</title>
+    <title>getblockchaininfo - Zcash 1.1.1 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,83 +25,70 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Bitcoin Core RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 1.1.1 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-          <h1>getblockchaininfo - Bitcoin RPC</h1>
+            <h1>getblockchaininfo - Zcash 1.1.1 RPC</h1>
           
             <pre>getblockchaininfo
-Returns an object containing various state info regarding blockchain processing.
+Returns an object containing various state info regarding block chain processing.
+
+Note that when the chain tip is at the last block before a network upgrade activation,
+consensus.chaintip != consensus.nextblock.
 
 Result:
 {
-  &#34;chain&#34;: &#34;xxxx&#34;,              (string) current network name as defined in BIP70 (main, test, regtest)
-  &#34;blocks&#34;: xxxxxx,             (numeric) the current number of blocks processed in the server
-  &#34;headers&#34;: xxxxxx,            (numeric) the current number of headers we have validated
-  &#34;bestblockhash&#34;: &#34;...&#34;,       (string) the hash of the currently best block
-  &#34;difficulty&#34;: xxxxxx,         (numeric) the current difficulty
-  &#34;mediantime&#34;: xxxxxx,         (numeric) median time for the current best block
+  &#34;chain&#34;: &#34;xxxx&#34;,        (string) current network name as defined in BIP70 (main, test, regtest)
+  &#34;blocks&#34;: xxxxxx,         (numeric) the current number of blocks processed in the server
+  &#34;headers&#34;: xxxxxx,        (numeric) the current number of headers we have validated
+  &#34;bestblockhash&#34;: &#34;...&#34;, (string) the hash of the currently best block
+  &#34;difficulty&#34;: xxxxxx,     (numeric) the current difficulty
   &#34;verificationprogress&#34;: xxxx, (numeric) estimate of verification progress [0..1]
-  &#34;initialblockdownload&#34;: xxxx, (bool) (debug information) estimate of whether this node is in Initial Block Download mode.
-  &#34;chainwork&#34;: &#34;xxxx&#34;           (string) total amount of work in active chain, in hexadecimal
-  &#34;size_on_disk&#34;: xxxxxx,       (numeric) the estimated size of the block and undo files on disk
-  &#34;pruned&#34;: xx,                 (boolean) if the blocks are subject to pruning
-  &#34;pruneheight&#34;: xxxxxx,        (numeric) lowest-height complete block stored (only present if pruning is enabled)
-  &#34;automatic_pruning&#34;: xx,      (boolean) whether automatic pruning is enabled (only present if pruning is enabled)
-  &#34;prune_target_size&#34;: xxxxxx,  (numeric) the target size used by pruning (only present if automatic pruning is enabled)
-  &#34;softforks&#34;: [                (array) status of softforks in progress
+  &#34;chainwork&#34;: &#34;xxxx&#34;     (string) total amount of work in active chain, in hexadecimal
+  &#34;commitments&#34;: xxxxxx,    (numeric) the current number of note commitments in the commitment tree
+  &#34;softforks&#34;: [            (array) status of softforks in progress
      {
-        &#34;id&#34;: &#34;xxxx&#34;,           (string) name of softfork
-        &#34;version&#34;: xx,          (numeric) block version
-        &#34;reject&#34;: {             (object) progress toward rejecting pre-softfork blocks
-           &#34;status&#34;: xx,        (boolean) true if threshold reached
+        &#34;id&#34;: &#34;xxxx&#34;,        (string) name of softfork
+        &#34;version&#34;: xx,         (numeric) block version
+        &#34;enforce&#34;: {           (object) progress toward enforcing the softfork rules for new-version blocks
+           &#34;status&#34;: xx,       (boolean) true if threshold reached
+           &#34;found&#34;: xx,        (numeric) number of blocks with the new version found
+           &#34;required&#34;: xx,     (numeric) number of blocks required to trigger
+           &#34;window&#34;: xx,       (numeric) maximum size of examined window of recent blocks
         },
+        &#34;reject&#34;: { ... }      (object) progress toward rejecting pre-softfork blocks (same fields as &#34;enforce&#34;)
      }, ...
   ],
-  &#34;bip9_softforks&#34;: {           (object) status of BIP9 softforks in progress
-     &#34;xxxx&#34; : {                 (string) name of the softfork
-        &#34;status&#34;: &#34;xxxx&#34;,       (string) one of &#34;defined&#34;, &#34;started&#34;, &#34;locked_in&#34;, &#34;active&#34;, &#34;failed&#34;
-        &#34;bit&#34;: xx,              (numeric) the bit (0-28) in the block version field used to signal this softfork (only for &#34;started&#34; status)
-        &#34;startTime&#34;: xx,        (numeric) the minimum median time past of a block at which the bit gains its meaning
-        &#34;timeout&#34;: xx,          (numeric) the median time past of a block at which the deployment is considered failed if not yet locked in
-        &#34;since&#34;: xx,            (numeric) height of the first block to which the status applies
-        &#34;statistics&#34;: {         (object) numeric statistics about BIP9 signalling for a softfork (only for &#34;started&#34; status)
-           &#34;period&#34;: xx,        (numeric) the length in blocks of the BIP9 signalling period 
-           &#34;threshold&#34;: xx,     (numeric) the number of blocks with the version bit set required to activate the feature 
-           &#34;elapsed&#34;: xx,       (numeric) the number of blocks elapsed since the beginning of the current period 
-           &#34;count&#34;: xx,         (numeric) the number of blocks with the version bit set in the current period 
-           &#34;possible&#34;: xx       (boolean) returns false if there are not enough blocks left in this period to pass activation threshold 
-        }
-     }
+  &#34;upgrades&#34;: {                (object) status of network upgrades
+     &#34;xxxx&#34; : {                (string) branch ID of the upgrade
+        &#34;name&#34;: &#34;xxxx&#34;,        (string) name of upgrade
+        &#34;activationheight&#34;: xxxxxx,  (numeric) block height of activation
+        &#34;status&#34;: &#34;xxxx&#34;,      (string) status of upgrade
+        &#34;info&#34;: &#34;xxxx&#34;,        (string) additional information about upgrade
+     }, ...
+  },
+  &#34;consensus&#34;: {               (object) branch IDs of the current and upcoming consensus rules
+     &#34;chaintip&#34;: &#34;xxxxxxxx&#34;,   (string) branch ID used to validate the current chain tip
+     &#34;nextblock&#34;: &#34;xxxxxxxx&#34;   (string) branch ID that the next block will be validated under
   }
-  &#34;warnings&#34; : &#34;...&#34;,           (string) any network and blockchain warnings.
 }
 
 Examples:
-&gt; bitcoin-cli getblockchaininfo 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getblockchaininfo&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8332/
+&gt; zcash-cli getblockchaininfo 
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getblockchaininfo&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
           
           <p>
-          This is a website, created out of frustration with uncomplete and outdated Bitcoin Core RPC documentation online.
+          Made by <a href="https://twitter.com/karel_3d">@karel_3d</a>; license of the docs is MIT (see <a href="https://github.com/zcash/zcash">zcash repo</a>), license of the scripts and webpage is also MIT ((C) 2018 Karel Bilek) (<a href="https://github.com/zcash-rpc/zcash-rpc.github.io">github repo</a>)
           </p>
           <p>
-          It was inspired by <a href="http://chainquery.com/bitcoin-api">ChainQuery</a>, which seems to be abandoned. These docs are even simplier, so they can be regenerated by anyone.
-          </p>
-          <p>
-          Made by <a href="https://twitter.com/karel_3d">@karel_3d</a>; license of the docs is MIT (see <a href="https://github.com/bitcoin/bitcoin/">bitcoin repo</a>), license of the scripts and webpage is also MIT ((C) 2018 Karel Bilek) (<a href="https://github.com/bitcoin-rpc/bitcoin-rpc.github.io">github repo</a>)
-          </p>
-          <p>
-          Bitcoin version: 0.16.0. 
-          </p>
-          <p>
-          Note that the RPC is from a regtest node (for completeness), so it includes some additional calls that a regular node doesn't have.
+          Note it uses a regtest node, so it includes some additional calls that a regular node doesn't have.
           </p>
         </div>
         <div class="col-4 col-lg-3 col-xl-2">
@@ -133,19 +120,7 @@ Examples:
                   <a href="getchaintips.html">getchaintips</a>
                   <br>
                 
-                  <a href="getchaintxstats.html">getchaintxstats</a>
-                  <br>
-                
                   <a href="getdifficulty.html">getdifficulty</a>
-                  <br>
-                
-                  <a href="getmempoolancestors.html">getmempoolancestors</a>
-                  <br>
-                
-                  <a href="getmempooldescendants.html">getmempooldescendants</a>
-                  <br>
-                
-                  <a href="getmempoolentry.html">getmempoolentry</a>
                   <br>
                 
                   <a href="getmempoolinfo.html">getmempoolinfo</a>
@@ -161,15 +136,6 @@ Examples:
                   <br>
                 
                   <a href="gettxoutsetinfo.html">gettxoutsetinfo</a>
-                  <br>
-                
-                  <a href="preciousblock.html">preciousblock</a>
-                  <br>
-                
-                  <a href="pruneblockchain.html">pruneblockchain</a>
-                  <br>
-                
-                  <a href="savemempool.html">savemempool</a>
                   <br>
                 
                   <a href="verifychain.html">verifychain</a>
@@ -188,19 +154,29 @@ Examples:
               </div>
               <div class="card-body">
                 
-                  <a href="getmemoryinfo.html">getmemoryinfo</a>
+                  <a href="getinfo.html">getinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>
                   <br>
                 
-                  <a href="logging.html">logging</a>
-                  <br>
-                
                   <a href="stop.html">stop</a>
                   <br>
                 
-                  <a href="uptime.html">uptime</a>
+              </div>
+            </div>
+            <br>
+          
+            <div class="card">
+              <div class="card-header">
+                Disclosure
+              </div>
+              <div class="card-body">
+                
+                  <a href="z_getpaymentdisclosure.html">z_getpaymentdisclosure</a>
+                  <br>
+                
+                  <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
                   <br>
                 
               </div>
@@ -216,7 +192,10 @@ Examples:
                   <a href="generate.html">generate</a>
                   <br>
                 
-                  <a href="generatetoaddress.html">generatetoaddress</a>
+                  <a href="getgenerate.html">getgenerate</a>
+                  <br>
+                
+                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -229,13 +208,22 @@ Examples:
               </div>
               <div class="card-body">
                 
+                  <a href="getblocksubsidy.html">getblocksubsidy</a>
+                  <br>
+                
                   <a href="getblocktemplate.html">getblocktemplate</a>
+                  <br>
+                
+                  <a href="getlocalsolps.html">getlocalsolps</a>
                   <br>
                 
                   <a href="getmininginfo.html">getmininginfo</a>
                   <br>
                 
                   <a href="getnetworkhashps.html">getnetworkhashps</a>
+                  <br>
+                
+                  <a href="getnetworksolps.html">getnetworksolps</a>
                   <br>
                 
                   <a href="prioritisetransaction.html">prioritisetransaction</a>
@@ -269,6 +257,9 @@ Examples:
                   <a href="getconnectioncount.html">getconnectioncount</a>
                   <br>
                 
+                  <a href="getdeprecationinfo.html">getdeprecationinfo</a>
+                  <br>
+                
                   <a href="getnettotals.html">getnettotals</a>
                   <br>
                 
@@ -287,9 +278,6 @@ Examples:
                   <a href="setban.html">setban</a>
                   <br>
                 
-                  <a href="setnetworkactive.html">setnetworkactive</a>
-                  <br>
-                
               </div>
             </div>
             <br>
@@ -299,9 +287,6 @@ Examples:
                 Rawtransactions
               </div>
               <div class="card-body">
-                
-                  <a href="combinerawtransaction.html">combinerawtransaction</a>
-                  <br>
                 
                   <a href="createrawtransaction.html">createrawtransaction</a>
                   <br>
@@ -340,16 +325,16 @@ Examples:
                   <a href="estimatefee.html">estimatefee</a>
                   <br>
                 
-                  <a href="estimatesmartfee.html">estimatesmartfee</a>
-                  <br>
-                
-                  <a href="signmessagewithprivkey.html">signmessagewithprivkey</a>
+                  <a href="estimatepriority.html">estimatepriority</a>
                   <br>
                 
                   <a href="validateaddress.html">validateaddress</a>
                   <br>
                 
                   <a href="verifymessage.html">verifymessage</a>
+                  <br>
+                
+                  <a href="z_validateaddress.html">z_validateaddress</a>
                   <br>
                 
               </div>
@@ -362,19 +347,10 @@ Examples:
               </div>
               <div class="card-body">
                 
-                  <a href="abandontransaction.html">abandontransaction</a>
-                  <br>
-                
-                  <a href="abortrescan.html">abortrescan</a>
-                  <br>
-                
                   <a href="addmultisigaddress.html">addmultisigaddress</a>
                   <br>
                 
                   <a href="backupwallet.html">backupwallet</a>
-                  <br>
-                
-                  <a href="bumpfee.html">bumpfee</a>
                   <br>
                 
                   <a href="dumpprivkey.html">dumpprivkey</a>
@@ -422,16 +398,7 @@ Examples:
                   <a href="importaddress.html">importaddress</a>
                   <br>
                 
-                  <a href="importmulti.html">importmulti</a>
-                  <br>
-                
                   <a href="importprivkey.html">importprivkey</a>
-                  <br>
-                
-                  <a href="importprunedfunds.html">importprunedfunds</a>
-                  <br>
-                
-                  <a href="importpubkey.html">importpubkey</a>
                   <br>
                 
                   <a href="importwallet.html">importwallet</a>
@@ -464,19 +431,10 @@ Examples:
                   <a href="listunspent.html">listunspent</a>
                   <br>
                 
-                  <a href="listwallets.html">listwallets</a>
-                  <br>
-                
                   <a href="lockunspent.html">lockunspent</a>
                   <br>
                 
                   <a href="move.html">move</a>
-                  <br>
-                
-                  <a href="removeprunedfunds.html">removeprunedfunds</a>
-                  <br>
-                
-                  <a href="rescanblockchain.html">rescanblockchain</a>
                   <br>
                 
                   <a href="sendfrom.html">sendfrom</a>
@@ -497,13 +455,73 @@ Examples:
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
-                  <a href="walletlock.html">walletlock</a>
+                  <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
-                  <a href="walletpassphrase.html">walletpassphrase</a>
+                  <a href="z_exportviewingkey.html">z_exportviewingkey</a>
                   <br>
                 
-                  <a href="walletpassphrasechange.html">walletpassphrasechange</a>
+                  <a href="z_exportwallet.html">z_exportwallet</a>
+                  <br>
+                
+                  <a href="z_getbalance.html">z_getbalance</a>
+                  <br>
+                
+                  <a href="z_getnewaddress.html">z_getnewaddress</a>
+                  <br>
+                
+                  <a href="z_getoperationresult.html">z_getoperationresult</a>
+                  <br>
+                
+                  <a href="z_getoperationstatus.html">z_getoperationstatus</a>
+                  <br>
+                
+                  <a href="z_gettotalbalance.html">z_gettotalbalance</a>
+                  <br>
+                
+                  <a href="z_importkey.html">z_importkey</a>
+                  <br>
+                
+                  <a href="z_importviewingkey.html">z_importviewingkey</a>
+                  <br>
+                
+                  <a href="z_importwallet.html">z_importwallet</a>
+                  <br>
+                
+                  <a href="z_listaddresses.html">z_listaddresses</a>
+                  <br>
+                
+                  <a href="z_listoperationids.html">z_listoperationids</a>
+                  <br>
+                
+                  <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunspent.html">z_listunspent</a>
+                  <br>
+                
+                  <a href="z_mergetoaddress.html">z_mergetoaddress</a>
+                  <br>
+                
+                  <a href="z_sendmany.html">z_sendmany</a>
+                  <br>
+                
+                  <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="zcbenchmark.html">zcbenchmark</a>
+                  <br>
+                
+                  <a href="zcrawjoinsplit.html">zcrawjoinsplit</a>
+                  <br>
+                
+                  <a href="zcrawkeygen.html">zcrawkeygen</a>
+                  <br>
+                
+                  <a href="zcrawreceive.html">zcrawreceive</a>
+                  <br>
+                
+                  <a href="zcsamplejoinsplit.html">zcsamplejoinsplit</a>
                   <br>
                 
               </div>

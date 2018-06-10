@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Bitcoin Core RPC Docs - sendmany">
+    <meta name="description" content="Zcash 1.1.1 RPC Docs - sendmany">
     <meta name="author" content="">
 
-    <title>sendmany - Bitcoin Core RPC Docs</title>
+    <title>sendmany - Zcash 1.1.1 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,78 +25,63 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Bitcoin Core RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 1.1.1 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-          <h1>sendmany - Bitcoin RPC</h1>
+            <h1>sendmany - Zcash 1.1.1 RPC</h1>
           
-            <pre>sendmany &#34;fromaccount&#34; {&#34;address&#34;:amount,...} ( minconf &#34;comment&#34; [&#34;address&#34;,...] replaceable conf_target &#34;estimate_mode&#34;)
+            <pre>sendmany &#34;fromaccount&#34; {&#34;address&#34;:amount,...} ( minconf &#34;comment&#34; [&#34;address&#34;,...] )
 
 Send multiple times. Amounts are double-precision floating point numbers.
 
 Arguments:
-1. &#34;fromaccount&#34;         (string, required) DEPRECATED. The account to send the funds from. Should be &#34;&#34; for the default account
+1. &#34;fromaccount&#34;         (string, required) MUST be set to the empty string &#34;&#34; to represent the default account. Passing any other string will result in an error.
 2. &#34;amounts&#34;             (string, required) A json object with addresses and amounts
     {
-      &#34;address&#34;:amount   (numeric or string) The bitcoin address is the key, the numeric amount (can be string) in BTC is the value
+      &#34;address&#34;:amount   (numeric) The Zcash address is the key, the numeric amount in ZEC is the value
       ,...
     }
 3. minconf                 (numeric, optional, default=1) Only use the balance confirmed at least this many times.
 4. &#34;comment&#34;             (string, optional) A comment
-5. subtractfeefrom         (array, optional) A json array with addresses.
+5. subtractfeefromamount   (string, optional) A json array with addresses.
                            The fee will be equally deducted from the amount of each selected address.
-                           Those recipients will receive less bitcoins than you enter in their corresponding amount field.
+                           Those recipients will receive less Zcash than you enter in their corresponding amount field.
                            If no addresses are specified here, the sender pays the fee.
     [
-      &#34;address&#34;          (string) Subtract fee from this address
+      &#34;address&#34;            (string) Subtract fee from this address
       ,...
     ]
-6. replaceable            (boolean, optional) Allow this transaction to be replaced by a transaction with higher fees via BIP 125
-7. conf_target            (numeric, optional) Confirmation target (in blocks)
-8. &#34;estimate_mode&#34;      (string, optional, default=UNSET) The fee estimate mode, must be one of:
-       &#34;UNSET&#34;
-       &#34;ECONOMICAL&#34;
-       &#34;CONSERVATIVE&#34;
 
 Result:
-&#34;txid&#34;                   (string) The transaction id for the send. Only 1 transaction is created regardless of 
+&#34;transactionid&#34;          (string) The transaction id for the send. Only 1 transaction is created regardless of 
                                     the number of addresses.
 
 Examples:
 
 Send two amounts to two different addresses:
-&gt; bitcoin-cli sendmany &#34;&#34; &#34;{\&#34;1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\&#34;:0.01,\&#34;1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;:0.02}&#34;
+&gt; zcash-cli sendmany &#34;&#34; &#34;{\&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1\&#34;:0.01,\&#34;t1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;:0.02}&#34;
 
 Send two amounts to two different addresses setting the confirmation and comment:
-&gt; bitcoin-cli sendmany &#34;&#34; &#34;{\&#34;1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\&#34;:0.01,\&#34;1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;:0.02}&#34; 6 &#34;testing&#34;
+&gt; zcash-cli sendmany &#34;&#34; &#34;{\&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1\&#34;:0.01,\&#34;t1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;:0.02}&#34; 6 &#34;testing&#34;
 
 Send two amounts to two different addresses, subtract fee from amount:
-&gt; bitcoin-cli sendmany &#34;&#34; &#34;{\&#34;1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\&#34;:0.01,\&#34;1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;:0.02}&#34; 1 &#34;&#34; &#34;[\&#34;1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\&#34;,\&#34;1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;]&#34;
+&gt; zcash-cli sendmany &#34;&#34; &#34;{\&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1\&#34;:0.01,\&#34;t1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;:0.02}&#34; 1 &#34;&#34; &#34;[\&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1\&#34;,\&#34;t1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;]&#34;
 
 As a json rpc call
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;sendmany&#34;, &#34;params&#34;: [&#34;&#34;, {&#34;1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX&#34;:0.01,&#34;1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz&#34;:0.02}, 6, &#34;testing&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8332/
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;sendmany&#34;, &#34;params&#34;: [&#34;&#34;, &#34;{\&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1\&#34;:0.01,\&#34;t1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\&#34;:0.02}&#34;, 6, &#34;testing&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
           
           <p>
-          This is a website, created out of frustration with uncomplete and outdated Bitcoin Core RPC documentation online.
+          Made by <a href="https://twitter.com/karel_3d">@karel_3d</a>; license of the docs is MIT (see <a href="https://github.com/zcash/zcash">zcash repo</a>), license of the scripts and webpage is also MIT ((C) 2018 Karel Bilek) (<a href="https://github.com/zcash-rpc/zcash-rpc.github.io">github repo</a>)
           </p>
           <p>
-          It was inspired by <a href="http://chainquery.com/bitcoin-api">ChainQuery</a>, which seems to be abandoned. These docs are even simplier, so they can be regenerated by anyone.
-          </p>
-          <p>
-          Made by <a href="https://twitter.com/karel_3d">@karel_3d</a>; license of the docs is MIT (see <a href="https://github.com/bitcoin/bitcoin/">bitcoin repo</a>), license of the scripts and webpage is also MIT ((C) 2018 Karel Bilek) (<a href="https://github.com/bitcoin-rpc/bitcoin-rpc.github.io">github repo</a>)
-          </p>
-          <p>
-          Bitcoin version: 0.16.0. 
-          </p>
-          <p>
-          Note that the RPC is from a regtest node (for completeness), so it includes some additional calls that a regular node doesn't have.
+          Note it uses a regtest node, so it includes some additional calls that a regular node doesn't have.
           </p>
         </div>
         <div class="col-4 col-lg-3 col-xl-2">
@@ -128,19 +113,7 @@ As a json rpc call
                   <a href="getchaintips.html">getchaintips</a>
                   <br>
                 
-                  <a href="getchaintxstats.html">getchaintxstats</a>
-                  <br>
-                
                   <a href="getdifficulty.html">getdifficulty</a>
-                  <br>
-                
-                  <a href="getmempoolancestors.html">getmempoolancestors</a>
-                  <br>
-                
-                  <a href="getmempooldescendants.html">getmempooldescendants</a>
-                  <br>
-                
-                  <a href="getmempoolentry.html">getmempoolentry</a>
                   <br>
                 
                   <a href="getmempoolinfo.html">getmempoolinfo</a>
@@ -156,15 +129,6 @@ As a json rpc call
                   <br>
                 
                   <a href="gettxoutsetinfo.html">gettxoutsetinfo</a>
-                  <br>
-                
-                  <a href="preciousblock.html">preciousblock</a>
-                  <br>
-                
-                  <a href="pruneblockchain.html">pruneblockchain</a>
-                  <br>
-                
-                  <a href="savemempool.html">savemempool</a>
                   <br>
                 
                   <a href="verifychain.html">verifychain</a>
@@ -183,19 +147,29 @@ As a json rpc call
               </div>
               <div class="card-body">
                 
-                  <a href="getmemoryinfo.html">getmemoryinfo</a>
+                  <a href="getinfo.html">getinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>
                   <br>
                 
-                  <a href="logging.html">logging</a>
-                  <br>
-                
                   <a href="stop.html">stop</a>
                   <br>
                 
-                  <a href="uptime.html">uptime</a>
+              </div>
+            </div>
+            <br>
+          
+            <div class="card">
+              <div class="card-header">
+                Disclosure
+              </div>
+              <div class="card-body">
+                
+                  <a href="z_getpaymentdisclosure.html">z_getpaymentdisclosure</a>
+                  <br>
+                
+                  <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
                   <br>
                 
               </div>
@@ -211,7 +185,10 @@ As a json rpc call
                   <a href="generate.html">generate</a>
                   <br>
                 
-                  <a href="generatetoaddress.html">generatetoaddress</a>
+                  <a href="getgenerate.html">getgenerate</a>
+                  <br>
+                
+                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -224,13 +201,22 @@ As a json rpc call
               </div>
               <div class="card-body">
                 
+                  <a href="getblocksubsidy.html">getblocksubsidy</a>
+                  <br>
+                
                   <a href="getblocktemplate.html">getblocktemplate</a>
+                  <br>
+                
+                  <a href="getlocalsolps.html">getlocalsolps</a>
                   <br>
                 
                   <a href="getmininginfo.html">getmininginfo</a>
                   <br>
                 
                   <a href="getnetworkhashps.html">getnetworkhashps</a>
+                  <br>
+                
+                  <a href="getnetworksolps.html">getnetworksolps</a>
                   <br>
                 
                   <a href="prioritisetransaction.html">prioritisetransaction</a>
@@ -264,6 +250,9 @@ As a json rpc call
                   <a href="getconnectioncount.html">getconnectioncount</a>
                   <br>
                 
+                  <a href="getdeprecationinfo.html">getdeprecationinfo</a>
+                  <br>
+                
                   <a href="getnettotals.html">getnettotals</a>
                   <br>
                 
@@ -282,9 +271,6 @@ As a json rpc call
                   <a href="setban.html">setban</a>
                   <br>
                 
-                  <a href="setnetworkactive.html">setnetworkactive</a>
-                  <br>
-                
               </div>
             </div>
             <br>
@@ -294,9 +280,6 @@ As a json rpc call
                 Rawtransactions
               </div>
               <div class="card-body">
-                
-                  <a href="combinerawtransaction.html">combinerawtransaction</a>
-                  <br>
                 
                   <a href="createrawtransaction.html">createrawtransaction</a>
                   <br>
@@ -335,16 +318,16 @@ As a json rpc call
                   <a href="estimatefee.html">estimatefee</a>
                   <br>
                 
-                  <a href="estimatesmartfee.html">estimatesmartfee</a>
-                  <br>
-                
-                  <a href="signmessagewithprivkey.html">signmessagewithprivkey</a>
+                  <a href="estimatepriority.html">estimatepriority</a>
                   <br>
                 
                   <a href="validateaddress.html">validateaddress</a>
                   <br>
                 
                   <a href="verifymessage.html">verifymessage</a>
+                  <br>
+                
+                  <a href="z_validateaddress.html">z_validateaddress</a>
                   <br>
                 
               </div>
@@ -357,19 +340,10 @@ As a json rpc call
               </div>
               <div class="card-body">
                 
-                  <a href="abandontransaction.html">abandontransaction</a>
-                  <br>
-                
-                  <a href="abortrescan.html">abortrescan</a>
-                  <br>
-                
                   <a href="addmultisigaddress.html">addmultisigaddress</a>
                   <br>
                 
                   <a href="backupwallet.html">backupwallet</a>
-                  <br>
-                
-                  <a href="bumpfee.html">bumpfee</a>
                   <br>
                 
                   <a href="dumpprivkey.html">dumpprivkey</a>
@@ -417,16 +391,7 @@ As a json rpc call
                   <a href="importaddress.html">importaddress</a>
                   <br>
                 
-                  <a href="importmulti.html">importmulti</a>
-                  <br>
-                
                   <a href="importprivkey.html">importprivkey</a>
-                  <br>
-                
-                  <a href="importprunedfunds.html">importprunedfunds</a>
-                  <br>
-                
-                  <a href="importpubkey.html">importpubkey</a>
                   <br>
                 
                   <a href="importwallet.html">importwallet</a>
@@ -459,19 +424,10 @@ As a json rpc call
                   <a href="listunspent.html">listunspent</a>
                   <br>
                 
-                  <a href="listwallets.html">listwallets</a>
-                  <br>
-                
                   <a href="lockunspent.html">lockunspent</a>
                   <br>
                 
                   <a href="move.html">move</a>
-                  <br>
-                
-                  <a href="removeprunedfunds.html">removeprunedfunds</a>
-                  <br>
-                
-                  <a href="rescanblockchain.html">rescanblockchain</a>
                   <br>
                 
                   <a href="sendfrom.html">sendfrom</a>
@@ -492,13 +448,73 @@ As a json rpc call
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
-                  <a href="walletlock.html">walletlock</a>
+                  <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
-                  <a href="walletpassphrase.html">walletpassphrase</a>
+                  <a href="z_exportviewingkey.html">z_exportviewingkey</a>
                   <br>
                 
-                  <a href="walletpassphrasechange.html">walletpassphrasechange</a>
+                  <a href="z_exportwallet.html">z_exportwallet</a>
+                  <br>
+                
+                  <a href="z_getbalance.html">z_getbalance</a>
+                  <br>
+                
+                  <a href="z_getnewaddress.html">z_getnewaddress</a>
+                  <br>
+                
+                  <a href="z_getoperationresult.html">z_getoperationresult</a>
+                  <br>
+                
+                  <a href="z_getoperationstatus.html">z_getoperationstatus</a>
+                  <br>
+                
+                  <a href="z_gettotalbalance.html">z_gettotalbalance</a>
+                  <br>
+                
+                  <a href="z_importkey.html">z_importkey</a>
+                  <br>
+                
+                  <a href="z_importviewingkey.html">z_importviewingkey</a>
+                  <br>
+                
+                  <a href="z_importwallet.html">z_importwallet</a>
+                  <br>
+                
+                  <a href="z_listaddresses.html">z_listaddresses</a>
+                  <br>
+                
+                  <a href="z_listoperationids.html">z_listoperationids</a>
+                  <br>
+                
+                  <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunspent.html">z_listunspent</a>
+                  <br>
+                
+                  <a href="z_mergetoaddress.html">z_mergetoaddress</a>
+                  <br>
+                
+                  <a href="z_sendmany.html">z_sendmany</a>
+                  <br>
+                
+                  <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="zcbenchmark.html">zcbenchmark</a>
+                  <br>
+                
+                  <a href="zcrawjoinsplit.html">zcrawjoinsplit</a>
+                  <br>
+                
+                  <a href="zcrawkeygen.html">zcrawkeygen</a>
+                  <br>
+                
+                  <a href="zcrawreceive.html">zcrawreceive</a>
+                  <br>
+                
+                  <a href="zcsamplejoinsplit.html">zcsamplejoinsplit</a>
                   <br>
                 
               </div>
