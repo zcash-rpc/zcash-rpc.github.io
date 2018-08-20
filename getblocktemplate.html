@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 1.1.1 RPC Docs - getblocktemplate">
+    <meta name="description" content="Zcash 2.0.0 RPC Docs - getblocktemplate">
     <meta name="author" content="">
 
-    <title>getblocktemplate - Zcash 1.1.1 RPC Docs</title>
+    <title>getblocktemplate - Zcash 2.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 1.1.1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 2.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getblocktemplate - Zcash 1.1.1 RPC</h1>
+            <h1>getblocktemplate - Zcash 2.0.0 RPC</h1>
           
             <pre>getblocktemplate ( &#34;jsonrequestobject&#34; )
 
@@ -53,9 +53,10 @@ Arguments:
 
 Result:
 {
-  &#34;version&#34; : n,                    (numeric) The block version
+  &#34;version&#34; : n,                     (numeric) The block version
   &#34;previousblockhash&#34; : &#34;xxxx&#34;,    (string) The hash of current highest block
-  &#34;transactions&#34; : [                (array) contents of non-coinbase transactions that should be included in the next block
+  &#34;finalsaplingroothash&#34; : &#34;xxxx&#34;, (string) The hash of the final sapling root
+  &#34;transactions&#34; : [                 (array) contents of non-coinbase transactions that should be included in the next block
       {
          &#34;data&#34; : &#34;xxxx&#34;,          (string) transaction data encoded in hexadecimal (byte-for-byte)
          &#34;hash&#34; : &#34;xxxx&#34;,          (string) hash/id encoded in little-endian hexadecimal
@@ -95,7 +96,7 @@ Examples:
           Made by <a href="https://twitter.com/karel_3d">@karel_3d</a>; license of the docs is MIT (see <a href="https://github.com/zcash/zcash">zcash repo</a>), license of the scripts and webpage is also MIT ((C) 2018 Karel Bilek) (<a href="https://github.com/zcash-rpc/zcash-rpc.github.io">github repo</a>)
           </p>
           <p>
-          Note it uses a regtest node, so it includes some additional calls that a regular node doesn't have.
+          Note it uses a mainnet node
           </p>
         </div>
         <div class="col-4 col-lg-3 col-xl-2">

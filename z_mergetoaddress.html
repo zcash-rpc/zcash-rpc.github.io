@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 1.1.1 RPC Docs - z_mergetoaddress">
+    <meta name="description" content="Zcash 2.0.0 RPC Docs - z_mergetoaddress">
     <meta name="author" content="">
 
-    <title>z_mergetoaddress - Zcash 1.1.1 RPC Docs</title>
+    <title>z_mergetoaddress - Zcash 2.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,18 +25,24 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 1.1.1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 2.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_mergetoaddress - Zcash 1.1.1 RPC</h1>
+            <h1>z_mergetoaddress - Zcash 2.0.0 RPC</h1>
           
             <pre>z_mergetoaddress [&#34;fromaddress&#34;, ... ] &#34;toaddress&#34; ( fee ) ( transparent_limit ) ( shielded_limit ) ( memo )
 
-WARNING: z_mergetoaddress is DISABLED but can be enabled as an experimental feature.
+WARNING: z_mergetoaddress is disabled.
+To enable it, restart zcashd with the -experimentalfeatures and
+-zmergetoaddress commandline options, or add these two lines
+to the zcash.conf file:
+
+experimentalfeatures=1
+zmergetoaddress=1
 
 Merge multiple UTXOs and notes into a single UTXO or note.  Coinbase UTXOs are ignored; use `z_shieldcoinbase`
 to combine those into a single note.
@@ -46,7 +52,8 @@ are unlocked.  The RPC call `listlockunspent` can be used to return a list of lo
 
 The number of UTXOs and notes selected for merging can be limited by the caller.  If the transparent limit
 parameter is set to zero, and Overwinter is not yet active, the -mempooltxinputlimit option will determine the
-number of UTXOs.  Any limit is constrained by the consensus rule defining a maximum transaction size of 100000 bytes before Sapling, and 2000000 bytes once Sapling activates.
+number of UTXOs.  Any limit is constrained by the consensus rule defining a maximum transaction size of
+100000 bytes before Sapling, and 2000000 bytes once Sapling activates.
 
 Arguments:
 1. fromaddresses         (string, required) A JSON array with addresses.
@@ -89,7 +96,7 @@ Examples:
           Made by <a href="https://twitter.com/karel_3d">@karel_3d</a>; license of the docs is MIT (see <a href="https://github.com/zcash/zcash">zcash repo</a>), license of the scripts and webpage is also MIT ((C) 2018 Karel Bilek) (<a href="https://github.com/zcash-rpc/zcash-rpc.github.io">github repo</a>)
           </p>
           <p>
-          Note it uses a regtest node, so it includes some additional calls that a regular node doesn't have.
+          Note it uses a mainnet node
           </p>
         </div>
         <div class="col-4 col-lg-3 col-xl-2">
