@@ -38,8 +38,8 @@
 
 Returns the balance of a taddr or zaddr belonging to the node’s wallet.
 
-CAUTION: If address is a watch-only zaddr, the returned balance may be larger than the actual balance,
-because spends cannot be detected with incoming viewing keys.
+CAUTION: If the wallet has only an incoming viewing key for this address, then spends cannot be
+detected, and so the returned balance may be larger than the actual balance.
 
 Arguments:
 1. &#34;address&#34;      (string) The selected address. It may be a transparent or private address.

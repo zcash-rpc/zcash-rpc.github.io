@@ -40,13 +40,14 @@ Returns array of unspent shielded notes with between minconf and maxconf (inclus
 Optionally filter to only include notes sent to specified addresses.
 When minconf is 0, unspent notes with zero confirmations are returned, even though they are not immediately spendable.
 Results are an array of Objects, each of which has:
-{txid, jsindex, jsoutindex, confirmations, address, amount, memo}
+{txid, jsindex, jsoutindex, confirmations, address, amount, memo} (Sprout)
+{txid, outindex, confirmations, address, amount, memo} (Sapling)
 
 Arguments:
 1. minconf          (numeric, optional, default=1) The minimum confirmations to filter
 2. maxconf          (numeric, optional, default=9999999) The maximum confirmations to filter
 3. includeWatchonly (bool, optional, default=false) Also include watchonly addresses (see &#39;z_importviewingkey&#39;)
-4. &#34;addresses&#34;      (string) A json array of zaddrs to filter on.  Duplicate addresses not allowed.
+4. &#34;addresses&#34;      (string) A json array of zaddrs (both Sprout and Sapling) to filter on.  Duplicate addresses not allowed.
     [
       &#34;address&#34;     (string) zaddr
       ,...
@@ -57,7 +58,8 @@ Result
   {
     &#34;txid&#34; : &#34;txid&#34;,          (string) the transaction id 
     &#34;jsindex&#34; : n             (numeric) the joinsplit index
-    &#34;jsoutindex&#34; : n          (numeric) the output index of the joinsplit
+    &#34;jsoutindex&#34; (sprout) : n          (numeric) the output index of the joinsplit
+    &#34;outindex&#34; (sapling) : n          (numeric) the output index
     &#34;confirmations&#34; : n       (numeric) the number of confirmations
     &#34;spendable&#34; : true|false  (boolean) true if note can be spent by wallet, false if note has zero confirmations, false if address is watchonly
     &#34;address&#34; : &#34;address&#34;,    (string) the shielded address
