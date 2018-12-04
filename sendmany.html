@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.1 RPC Docs - sendmany">
+    <meta name="description" content="Zcash 2.0.2 RPC Docs - sendmany">
     <meta name="author" content="">
 
-    <title>sendmany - Zcash 2.0.1 RPC Docs</title>
+    <title>sendmany - Zcash 2.0.2 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,18 +25,18 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.0.1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 2.0.2 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>sendmany - Zcash 2.0.1 RPC</h1>
+            <h1>sendmany - Zcash 2.0.2 RPC</h1>
           
             <pre>sendmany &#34;fromaccount&#34; {&#34;address&#34;:amount,...} ( minconf &#34;comment&#34; [&#34;address&#34;,...] )
 
-Send multiple times. Amounts are double-precision floating point numbers.
+Send multiple times. Amounts are decimal numbers with at most 8 digits of precision.
 
 Arguments:
 1. &#34;fromaccount&#34;         (string, required) MUST be set to the empty string &#34;&#34; to represent the default account. Passing any other string will result in an error.
