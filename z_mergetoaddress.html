@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.2 RPC Docs - z_mergetoaddress">
+    <meta name="description" content="Zcash 2.0.3 RPC Docs - z_mergetoaddress">
     <meta name="author" content="">
 
-    <title>z_mergetoaddress - Zcash 2.0.2 RPC Docs</title>
+    <title>z_mergetoaddress - Zcash 2.0.3 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.0.2 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 2.0.3 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_mergetoaddress - Zcash 2.0.2 RPC</h1>
+            <h1>z_mergetoaddress - Zcash 2.0.3 RPC</h1>
           
             <pre>z_mergetoaddress [&#34;fromaddress&#34;, ... ] &#34;toaddress&#34; ( fee ) ( transparent_limit ) ( shielded_limit ) ( memo )
 
@@ -44,25 +44,27 @@ are unlocked.  The RPC call `listlockunspent` can be used to return a list of lo
 
 The number of UTXOs and notes selected for merging can be limited by the caller.  If the transparent limit
 parameter is set to zero, and Overwinter is not yet active, the -mempooltxinputlimit option will determine the
-number of UTXOs.  Any limit is constrained by the consensus rule defining a maximum transaction size of
-100000 bytes before Sapling, and 2000000 bytes once Sapling activates.
+number of UTXOs.  After Overwinter has activated -mempooltxinputlimit is ignored and having a transparent
+input limit of zero will mean limit the number of UTXOs based on the size of the transaction.  Any limit is
+constrained by the consensus rule defining a maximum transaction size of 100000 bytes before Sapling, and 2000000
+bytes once Sapling activates.
 
 Arguments:
-1. fromaddresses         (string, required) A JSON array with addresses.
+1. fromaddresses         (array, required) A JSON array with addresses.
                          The following special strings are accepted inside the array:
-                             - &#34;ANY_TADDR&#34;:   Merge UTXOs from any t-addrs belonging to the wallet.
-                             - &#34;ANY_SPROUT&#34;:  Merge notes from any Sprout z-addrs belonging to the wallet.
-                             - &#34;ANY_SAPLING&#34;: Merge notes from any Sapling z-addrs belonging to the wallet.
-                         If a special string is given, any given addresses of that type will be ignored.
+                             - &#34;ANY_TADDR&#34;:   Merge UTXOs from any taddrs belonging to the wallet.
+                             - &#34;ANY_SPROUT&#34;:  Merge notes from any Sprout zaddrs belonging to the wallet.
+                             - &#34;ANY_SAPLING&#34;: Merge notes from any Sapling zaddrs belonging to the wallet.
+                         If a special string is given, any given addresses of that type will be counted as duplicates and cause an error.
     [
-      &#34;address&#34;          (string) Can be a t-addr or a z-addr
+      &#34;address&#34;          (string) Can be a taddr or a zaddr
       ,...
     ]
-2. &#34;toaddress&#34;           (string, required) The t-addr or z-addr to send the funds to.
+2. &#34;toaddress&#34;           (string, required) The taddr or zaddr to send the funds to.
 3. fee                   (numeric, optional, default=0.0001) The fee amount to attach to this transaction.
 4. transparent_limit     (numeric, optional, default=50) Limit on the maximum number of UTXOs to merge.  Set to 0 to use node option -mempooltxinputlimit (before Overwinter), or as many as will fit in the transaction (after Overwinter).
-4. shielded_limit        (numeric, optional, default=20 Sprout or 200 Sapling Notes) Limit on the maximum number of notes to merge.  Set to 0 to merge as many as will fit in the transaction.
-5. &#34;memo&#34;                (string, optional) Encoded as hex. When toaddress is a z-addr, this will be stored in the memo field of the new note.
+5. shielded_limit        (numeric, optional, default=20 Sprout or 200 Sapling Notes) Limit on the maximum number of notes to merge.  Set to 0 to merge as many as will fit in the transaction.
+6. &#34;memo&#34;                (string, optional) Encoded as hex. When toaddress is a zaddr, this will be stored in the memo field of the new note.
 
 Result:
 {
@@ -74,12 +76,12 @@ Result:
   &#34;mergingTransparentValue&#34;: xxx      (numeric) Value of UTXOs being merged.
   &#34;mergingNotes&#34;: xxx                 (numeric) Number of notes being merged.
   &#34;mergingShieldedValue&#34;: xxx         (numeric) Value of notes being merged.
-  &#34;opid&#34;: xxx          (string) An operationid to pass to z_getoperationstatus to get the result of the operation.
+  &#34;opid&#34;: xxx                         (string) An operationid to pass to z_getoperationstatus to get the result of the operation.
 }
 
 Examples:
-&gt; zcash-cli z_mergetoaddress &#39;[&#34;t1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd&#34;]&#39; ztfaW34Gj9FrnGUEf833ywDVL62NWXBM81u6EQnM6VR45eYnXhwztecW1SjxA7JrmAXKJhxhj3vDNEpVCQoSvVoSpmbhtjf
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;z_mergetoaddress&#34;, &#34;params&#34;: [[&#34;t1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd&#34;], &#34;ztfaW34Gj9FrnGUEf833ywDVL62NWXBM81u6EQnM6VR45eYnXhwztecW1SjxA7JrmAXKJhxhj3vDNEpVCQoSvVoSpmbhtjf&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli z_mergetoaddress &#39;[&#34;ANY_SAPLING&#34;, &#34;t1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd&#34;]&#39; ztestsapling19rnyu293v44f0kvtmszhx35lpdug574twc0lwyf4s7w0umtkrdq5nfcauxrxcyfmh3m7slemqsj
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;z_mergetoaddress&#34;, &#34;params&#34;: [[&#34;ANY_SAPLING&#34;, &#34;t1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd&#34;], &#34;ztestsapling19rnyu293v44f0kvtmszhx35lpdug574twc0lwyf4s7w0umtkrdq5nfcauxrxcyfmh3m7slemqsj&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
