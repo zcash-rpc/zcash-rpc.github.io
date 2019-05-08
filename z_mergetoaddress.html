@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.4 RPC Docs - z_mergetoaddress">
+    <meta name="description" content="Zcash 2.0.5-1 RPC Docs - z_mergetoaddress">
     <meta name="author" content="">
 
-    <title>z_mergetoaddress - Zcash 2.0.4 RPC Docs</title>
+    <title>z_mergetoaddress - Zcash 2.0.5-1 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,16 +25,24 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.0.4 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 2.0.5-1 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_mergetoaddress - Zcash 2.0.4 RPC</h1>
+            <h1>z_mergetoaddress - Zcash 2.0.5-1 RPC</h1>
           
             <pre>z_mergetoaddress [&#34;fromaddress&#34;, ... ] &#34;toaddress&#34; ( fee ) ( transparent_limit ) ( shielded_limit ) ( memo )
+
+WARNING: z_mergetoaddress is disabled.
+To enable it, restart zcashd with the -experimentalfeatures and
+-zmergetoaddress commandline options, or add these two lines
+to the zcash.conf file:
+
+experimentalfeatures=1
+zmergetoaddress=1
 
 Merge multiple UTXOs and notes into a single UTXO or note.  Coinbase UTXOs are ignored; use `z_shieldcoinbase`
 to combine those into a single note.
@@ -469,6 +477,9 @@ Examples:
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
@@ -506,6 +517,9 @@ Examples:
                   <br>
                 
                   <a href="z_sendmany.html">z_sendmany</a>
+                  <br>
+                
+                  <a href="z_setmigration.html">z_setmigration</a>
                   <br>
                 
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>

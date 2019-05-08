@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.5-1 RPC Docs - getconnectioncount">
+    <meta name="description" content="Zcash 2.0.5-1 RPC Docs - z_setmigration">
     <meta name="author" content="">
 
-    <title>getconnectioncount - Zcash 2.0.5-1 RPC Docs</title>
+    <title>z_setmigration - Zcash 2.0.5-1 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,18 +32,21 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getconnectioncount - Zcash 2.0.5-1 RPC</h1>
+            <h1>z_setmigration - Zcash 2.0.5-1 RPC</h1>
           
-            <pre>getconnectioncount
+            <pre>z_setmigration enabled
+When enabled the Sprout to Sapling migration will attempt to migrate all funds from this wallet’s
+Sprout addresses to either the address for Sapling account 0 or the address specified by the parameter
+&#39;-migrationdestaddress&#39;.
 
-Returns the number of connections to other nodes.
+This migration is designed to minimize information leakage. As a result for wallets with a significant
+Sprout balance, this process may take several weeks. The migration works by sending, up to 5, as many
+transactions as possible whenever the blockchain reaches a height equal to 499 modulo 500. The transaction
+amounts are picked according to the random distribution specified in ZIP 308. The migration will end once
+the wallet’s Sprout balance is below0.01 ZEC.
 
-bResult:
-n          (numeric) The connection count
-
-Examples:
-&gt; zcash-cli getconnectioncount 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getconnectioncount&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+Arguments:
+1. enabled  (boolean, required) &#39;true&#39; or &#39;false&#39; to enable or disable respectively.
 
 </pre>
             <hr>
