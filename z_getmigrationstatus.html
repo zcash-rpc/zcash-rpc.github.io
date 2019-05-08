@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.5-1 RPC Docs - getconnectioncount">
+    <meta name="description" content="Zcash 2.0.5-1 RPC Docs - z_getmigrationstatus">
     <meta name="author" content="">
 
-    <title>getconnectioncount - Zcash 2.0.5-1 RPC Docs</title>
+    <title>z_getmigrationstatus - Zcash 2.0.5-1 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,18 +32,26 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getconnectioncount - Zcash 2.0.5-1 RPC</h1>
+            <h1>z_getmigrationstatus - Zcash 2.0.5-1 RPC</h1>
           
-            <pre>getconnectioncount
+            <pre>z_getmigrationstatus
+Returns information about the status of the Sprout to Sapling migration.
+In the result a transactions is defined as finalized if and only if it has
+at least ten confirmations.
+Note: It is possible that manually created transactions involving this wallet
+will be included in the result.
 
-Returns the number of connections to other nodes.
-
-bResult:
-n          (numeric) The connection count
-
-Examples:
-&gt; zcash-cli getconnectioncount 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getconnectioncount&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+Result:
+{
+  &#34;enabled&#34;: true|false,                    (boolean) Whether or not migration is enabled
+  &#34;destination_address&#34;: &#34;zaddr&#34;,           (string) The Sapling address that will receive Sprout funds
+  &#34;unmigrated_amount&#34;: nnn.n,               (numeric) The total amount of unmigrated ZEC 
+  &#34;unfinalized_migrated_amount&#34;: nnn.n,     (numeric) The total amount of unfinalized ZEC 
+  &#34;finalized_migrated_amount&#34;: nnn.n,       (numeric) The total amount of finalized ZEC 
+  &#34;finalized_migration_transactions&#34;: nnn,  (numeric) The number of migration transactions involving this wallet
+  &#34;time_started&#34;: ttt,                      (numeric, optional) The block time of the first migration transaction as a Unix timestamp
+  &#34;migration_txids&#34;: [txids]                (json array of strings) An array of all migration txids involving this wallet
+}
 
 </pre>
             <hr>
