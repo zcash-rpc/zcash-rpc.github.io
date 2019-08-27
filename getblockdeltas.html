@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.7 RPC Docs - createmultisig">
+    <meta name="description" content="Zcash 2.0.7 RPC Docs - getblockdeltas">
     <meta name="author" content="">
 
-    <title>createmultisig - Zcash 2.0.7 RPC Docs</title>
+    <title>getblockdeltas - Zcash 2.0.7 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,34 +32,66 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>createmultisig - Zcash 2.0.7 RPC</h1>
+            <h1>getblockdeltas - Zcash 2.0.7 RPC</h1>
           
-            <pre>createmultisig nrequired [&#34;key&#34;,...]
+            <pre>getblockdeltas &#34;blockhash&#34;
 
-Creates a multi-signature address with n signature of m keys required.
-It returns a json object with the address and redeemScript.
+Returns information about the given block and its transactions.
+
+WARNING: getblockdeltas is disabled.
+To enable it, restart zcashd with the -experimentalfeatures and
+-insightexplorer commandline options, or add these two lines
+to the zcash.conf file:
+
+experimentalfeatures=1
+insightexplorer=1
 
 Arguments:
-1. nrequired      (numeric, required) The number of required signatures out of the n keys or addresses.
-2. &#34;keys&#34;       (string, required) A json array of keys which are Zcash addresses or hex-encoded public keys
-     [
-       &#34;key&#34;    (string) Zcash address or hex-encoded public key
-       ,...
-     ]
+1. &#34;hash&#34;          (string, required) The block hash
 
 Result:
 {
-  &#34;address&#34;:&#34;multisigaddress&#34;,  (string) The value of the new multisig address.
-  &#34;redeemScript&#34;:&#34;script&#34;       (string) The string value of the hex-encoded redemption script.
+  &#34;hash&#34;: &#34;hash&#34;,              (string) block ID
+  &#34;confirmations&#34;: n,          (numeric) number of confirmations
+  &#34;size&#34;: n,                   (numeric) block size in bytes
+  &#34;height&#34;: n,                 (numeric) block height
+  &#34;version&#34;: n,                (numeric) block version (e.g. 4)
+  &#34;merkleroot&#34;: &#34;hash&#34;,        (hexstring) block Merkle root
+  &#34;deltas&#34;: [
+    {
+      &#34;txid&#34;: &#34;hash&#34;,          (hexstring) transaction ID
+      &#34;index&#34;: n,              (numeric) The offset of the tx in the block
+      &#34;inputs&#34;: [                (array of json objects)
+        {
+          &#34;address&#34;: &#34;taddr&#34;,  (string) transparent address
+          &#34;satoshis&#34;: n,       (numeric) negative of spend amount
+          &#34;index&#34;: n,          (numeric) vin index
+          &#34;prevtxid&#34;: &#34;hash&#34;,  (string) source utxo tx ID
+          &#34;prevout&#34;: n         (numeric) source utxo index
+        }, ...
+      ],
+      &#34;outputs&#34;: [             (array of json objects)
+        {
+          &#34;address&#34;: &#34;taddr&#34;,  (string) transparent address
+          &#34;satoshis&#34;: n,       (numeric) amount
+          &#34;index&#34;: n           (numeric) vout index
+        }, ...
+      ]
+    }, ...
+  ],
+  &#34;time&#34; : n,                  (numeric) The block version
+  &#34;mediantime&#34;: n,             (numeric) The most recent blocks&#39; ave time
+  &#34;nonce&#34; : &#34;nonce&#34;,           (hex string) The nonce
+  &#34;bits&#34; : &#34;1d00ffff&#34;,         (hex string) The bits
+  &#34;difficulty&#34;: n,             (numeric) the current difficulty
+  &#34;chainwork&#34;: &#34;xxxx&#34;          (hex string) total amount of work in active chain
+  &#34;previousblockhash&#34; : &#34;hash&#34;,(hex string) The hash of the previous block
+  &#34;nextblockhash&#34; : &#34;hash&#34;     (hex string) The hash of the next block
 }
 
 Examples:
-
-Create a multisig address from 2 addresses
-&gt; zcash-cli createmultisig 2 &#34;[\&#34;t16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\&#34;,\&#34;t171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\&#34;]&#34;
-
-As a json rpc call
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;createmultisig&#34;, &#34;params&#34;: [2, &#34;[\&#34;t16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\&#34;,\&#34;t171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\&#34;]&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli getblockdeltas 00227e566682aebd6a7a5b772c96d7a999cadaebeaf1ce96f4191a3aad58b00b
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getblockdeltas&#34;, &#34;params&#34;: [&#34;00227e566682aebd6a7a5b772c96d7a999cadaebeaf1ce96f4191a3aad58b00b&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>

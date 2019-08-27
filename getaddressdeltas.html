@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.7 RPC Docs - createmultisig">
+    <meta name="description" content="Zcash 2.0.7 RPC Docs - getaddressdeltas">
     <meta name="author" content="">
 
-    <title>createmultisig - Zcash 2.0.7 RPC Docs</title>
+    <title>getaddressdeltas - Zcash 2.0.7 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,34 +32,77 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>createmultisig - Zcash 2.0.7 RPC</h1>
+            <h1>getaddressdeltas - Zcash 2.0.7 RPC</h1>
           
-            <pre>createmultisig nrequired [&#34;key&#34;,...]
+            <pre>getaddressdeltas {&#34;addresses&#34;: [&#34;taddr&#34;, ...], (&#34;start&#34;: n), (&#34;end&#34;: n), (&#34;chainInfo&#34;: true|false)}
 
-Creates a multi-signature address with n signature of m keys required.
-It returns a json object with the address and redeemScript.
+Returns all changes for an address.
+
+Returns information about all changes to the given transparent addresses within the given (inclusive)
+
+block height range, default is the full blockchain.
+
+WARNING: getaddressdeltas is disabled.
+To enable it, restart zcashd with the -experimentalfeatures and
+-insightexplorer commandline options, or add these two lines
+to the zcash.conf file:
+
+experimentalfeatures=1
+insightexplorer=1
 
 Arguments:
-1. nrequired      (numeric, required) The number of required signatures out of the n keys or addresses.
-2. &#34;keys&#34;       (string, required) A json array of keys which are Zcash addresses or hex-encoded public keys
-     [
-       &#34;key&#34;    (string) Zcash address or hex-encoded public key
-       ,...
-     ]
+{
+  &#34;addresses&#34;:
+    [
+      &#34;address&#34; (string) The base58check encoded address
+      ,...
+    ]
+  &#34;start&#34;       (number, optional) The start block height
+  &#34;end&#34;         (number, optional) The end block height
+  &#34;chainInfo&#34;   (boolean, optional, default=false) Include chain info in results, only applies if start and end specified
+}
+(or)
+&#34;address&#34;       (string) The base58check encoded address
 
 Result:
+[
+  {
+    &#34;satoshis&#34;  (number) The difference of zatoshis
+    &#34;txid&#34;      (string) The related txid
+    &#34;index&#34;     (number) The related input or output index
+    &#34;height&#34;    (number) The block height
+    &#34;address&#34;   (string) The base58check encoded address
+  }, ...
+]
+
+(or, if chainInfo is true):
+
 {
-  &#34;address&#34;:&#34;multisigaddress&#34;,  (string) The value of the new multisig address.
-  &#34;redeemScript&#34;:&#34;script&#34;       (string) The string value of the hex-encoded redemption script.
+  &#34;deltas&#34;:
+    [
+      {
+        &#34;satoshis&#34;    (number) The difference of zatoshis
+        &#34;txid&#34;        (string) The related txid
+        &#34;index&#34;       (number) The related input or output index
+        &#34;height&#34;      (number) The block height
+        &#34;address&#34;     (string)  The address base58check encoded
+      }, ...
+    ],
+  &#34;start&#34;:
+    {
+      &#34;hash&#34;          (string)  The start block hash
+      &#34;height&#34;        (numeric) The height of the start block
+    }
+  &#34;end&#34;:
+    {
+      &#34;hash&#34;          (string)  The end block hash
+      &#34;height&#34;        (numeric) The height of the end block
+    }
 }
 
 Examples:
-
-Create a multisig address from 2 addresses
-&gt; zcash-cli createmultisig 2 &#34;[\&#34;t16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\&#34;,\&#34;t171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\&#34;]&#34;
-
-As a json rpc call
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;createmultisig&#34;, &#34;params&#34;: [2, &#34;[\&#34;t16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\&#34;,\&#34;t171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\&#34;]&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli getaddressdeltas &#39;{&#34;addresses&#34;: [&#34;tmYXBYJj1K7vhejSec5osXK2QsGa5MTisUQ&#34;], &#34;start&#34;: 1000, &#34;end&#34;: 2000, &#34;chainInfo&#34;: true}&#39;
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getaddressdeltas&#34;, &#34;params&#34;: [{&#34;addresses&#34;: [&#34;tmYXBYJj1K7vhejSec5osXK2QsGa5MTisUQ&#34;], &#34;start&#34;: 1000, &#34;end&#34;: 2000, &#34;chainInfo&#34;: true}] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
