@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.7 RPC Docs - getspentinfo">
+    <meta name="description" content="Zcash 2.1.2 RPC Docs - getspentinfo">
     <meta name="author" content="">
 
-    <title>getspentinfo - Zcash 2.0.7 RPC Docs</title>
+    <title>getspentinfo - Zcash 2.1.2 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.0.7 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getspentinfo - Zcash 2.0.7 RPC</h1>
+            <h1>getspentinfo - Zcash 2.1.2 RPC</h1>
           
             <pre>getspentinfo {&#34;txid&#34;: &#34;txidhex&#34;, &#34;index&#34;: n}
 
@@ -60,8 +60,8 @@ Result:
 }
 
 Examples:
-&gt; zcash-cli getspentinfo &#39;{&#34;txid&#34;: &#34;0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9&#34;, &#34;index&#34;: 0}&#39;
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getspentinfo&#34;, &#34;params&#34;: [{&#34;txid&#34;: &#34;0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9&#34;, &#34;index&#34;: 0}] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli getspentinfo &#39;{&#34;txid&#34;: &#34;33990288fb116981260be1de10b8c764f997674545ab14f9240f00346333b780&#34;, &#34;index&#34;: 4}&#39;
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getspentinfo&#34;, &#34;params&#34;: [{&#34;txid&#34;: &#34;33990288fb116981260be1de10b8c764f997674545ab14f9240f00346333b780&#34;, &#34;index&#34;: 4}] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
@@ -415,6 +415,9 @@ Examples:
                   <br>
                 
                   <a href="importprivkey.html">importprivkey</a>
+                  <br>
+                
+                  <a href="importpubkey.html">importpubkey</a>
                   <br>
                 
                   <a href="importwallet.html">importwallet</a>
