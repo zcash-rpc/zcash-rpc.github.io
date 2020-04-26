@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.0.7 RPC Docs - importaddress">
+    <meta name="description" content="Zcash 2.1.2 RPC Docs - importaddress">
     <meta name="author" content="">
 
-    <title>importaddress - Zcash 2.0.7 RPC Docs</title>
+    <title>importaddress - Zcash 2.1.2 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,36 +25,41 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.0.7 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>importaddress - Zcash 2.0.7 RPC</h1>
+            <h1>importaddress - Zcash 2.1.2 RPC</h1>
           
-            <pre>importaddress &#34;address&#34; ( &#34;label&#34; rescan )
+            <pre>importaddress &#34;address&#34; ( &#34;label&#34; rescan p2sh )
 
-Adds an address or script (in hex) that can be watched as if it were in your wallet but cannot be used to spend.
+Adds a script (in hex) or address that can be watched as if it were in your wallet but cannot be used to spend.
 
 Arguments:
-1. &#34;address&#34;          (string, required) The address
+1. &#34;script&#34;           (string, required) The hex-encoded script (or address)
 2. &#34;label&#34;            (string, optional, default=&#34;&#34;) An optional label
 3. rescan               (boolean, optional, default=true) Rescan the wallet for transactions
+4. p2sh                 (boolean, optional, default=false) Add the P2SH version of the script as well
 
 Note: This call can take minutes to complete if rescan is true.
+If you have the full public key, you should call importpubkey instead of this.
+
+Note: If you import a non-standard raw script in hex form, outputs sending to it will be treated
+as change, and not show up in many RPCs.
 
 Examples:
 
-Import an address with rescan
-&gt; zcash-cli importaddress &#34;myaddress&#34;
+Import a script with rescan
+&gt; zcash-cli importaddress &#34;myscript&#34;
 
 Import using a label without rescan
-&gt; zcash-cli importaddress &#34;myaddress&#34; &#34;testing&#34; false
+&gt; zcash-cli importaddress &#34;myscript&#34; &#34;testing&#34; false
 
 As a JSON-RPC call
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;importaddress&#34;, &#34;params&#34;: [&#34;myaddress&#34;, &#34;testing&#34;, false] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;importaddress&#34;, &#34;params&#34;: [&#34;myscript&#34;, &#34;testing&#34;, false] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
@@ -408,6 +413,9 @@ As a JSON-RPC call
                   <br>
                 
                   <a href="importprivkey.html">importprivkey</a>
+                  <br>
+                
+                  <a href="importpubkey.html">importpubkey</a>
                   <br>
                 
                   <a href="importwallet.html">importwallet</a>
