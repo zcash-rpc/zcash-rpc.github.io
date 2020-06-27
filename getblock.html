@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.1.2 RPC Docs - getblock">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - getblock">
     <meta name="author" content="">
 
-    <title>getblock - Zcash 2.1.2 RPC Docs</title>
+    <title>getblock - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 3.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getblock - Zcash 2.1.2 RPC</h1>
+            <h1>getblock - Zcash 3.0.0 RPC</h1>
           
             <pre>getblock &#34;hash|height&#34; ( verbosity )
 
@@ -41,7 +41,7 @@ If verbosity is 1, returns an Object with information about the block.
 If verbosity is 2, returns an Object with information about the block and information about each transaction. 
 
 Arguments:
-1. &#34;hash|height&#34;          (string, required) The block hash or height
+1. &#34;hash|height&#34;          (string, required) The block hash or height. Height can be negative where -1 is the last known valid block
 2. verbosity              (numeric, optional, default=1) 0 for hex encoded data, 1 for a json object, and 2 for json object with transaction data
 
 Result (for verbosity = 0):
@@ -190,6 +190,9 @@ Examples:
               </div>
               <div class="card-body">
                 
+                  <a href="getexperimentalfeatures.html">getexperimentalfeatures</a>
+                  <br>
+                
                   <a href="getinfo.html">getinfo</a>
                   <br>
                 
@@ -213,25 +216,6 @@ Examples:
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
-                Generating
-              </div>
-              <div class="card-body">
-                
-                  <a href="generate.html">generate</a>
-                  <br>
-                
-                  <a href="getgenerate.html">getgenerate</a>
-                  <br>
-                
-                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -512,6 +496,9 @@ Examples:
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -552,6 +539,9 @@ Examples:
                   <br>
                 
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

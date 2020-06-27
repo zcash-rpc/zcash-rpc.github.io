@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.1.2 RPC Docs - listtransactions">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - listtransactions">
     <meta name="author" content="">
 
-    <title>listtransactions - Zcash 2.1.2 RPC Docs</title>
+    <title>listtransactions - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 3.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>listtransactions - Zcash 2.1.2 RPC</h1>
+            <h1>listtransactions - Zcash 3.0.0 RPC</h1>
           
             <pre>listtransactions ( &#34;account&#34; count from includeWatchonly)
 
@@ -55,6 +55,8 @@ Result:
                                                 transaction between accounts, and not associated with an address,
                                                 transaction id or block. &#39;send&#39; and &#39;receive&#39; transactions are 
                                                 associated with an address, transaction id and block details
+    &#34;status&#34; : &#34;mined|waiting|expiringsoon|expired&#34;,    (string) The transaction status, can be &#39;mined&#39;, &#39;waiting&#39;, &#39;expiringsoon&#39; 
+                                                                    or &#39;expired&#39;. Available for &#39;send&#39; and &#39;receive&#39; category of transactions.
     &#34;amount&#34;: x.xxx,          (numeric) The amount in ZEC. This is negative for the &#39;send&#39; category, and for the
                                          &#39;move&#39; category for moves outbound. It is positive for the &#39;receive&#39; category,
                                          and for the &#39;move&#39; category for inbound funds.
@@ -197,6 +199,9 @@ As a json rpc call
               </div>
               <div class="card-body">
                 
+                  <a href="getexperimentalfeatures.html">getexperimentalfeatures</a>
+                  <br>
+                
                   <a href="getinfo.html">getinfo</a>
                   <br>
                 
@@ -220,25 +225,6 @@ As a json rpc call
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
-                Generating
-              </div>
-              <div class="card-body">
-                
-                  <a href="generate.html">generate</a>
-                  <br>
-                
-                  <a href="getgenerate.html">getgenerate</a>
-                  <br>
-                
-                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -519,6 +505,9 @@ As a json rpc call
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -559,6 +548,9 @@ As a json rpc call
                   <br>
                 
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

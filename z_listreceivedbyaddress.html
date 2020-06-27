@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.1.2 RPC Docs - z_listreceivedbyaddress">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - z_listreceivedbyaddress">
     <meta name="author" content="">
 
-    <title>z_listreceivedbyaddress - Zcash 2.1.2 RPC Docs</title>
+    <title>z_listreceivedbyaddress - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 3.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_listreceivedbyaddress - Zcash 2.1.2 RPC</h1>
+            <h1>z_listreceivedbyaddress - Zcash 3.0.0 RPC</h1>
           
             <pre>z_listreceivedbyaddress &#34;address&#34; ( minconf )
 
@@ -47,6 +47,10 @@ Result:
   &#34;txid&#34;: &#34;txid&#34;,           (string) the transaction id
   &#34;amount&#34;: xxxxx,         (numeric) the amount of value in the note
   &#34;memo&#34;: xxxxx,           (string) hexadecimal string representation of memo field
+  &#34;confirmations&#34; : n,     (numeric) the number of confirmations
+  &#34;blockheight&#34;: n,         (numeric) The block height containing the transaction
+  &#34;blockindex&#34;: n,         (numeric) The block index containing the transaction.
+  &#34;blocktime&#34;: xxx,              (numeric) The transaction time in seconds since epoch (midnight Jan 1 1970 GMT).
   &#34;jsindex&#34; (sprout) : n,     (numeric) the joinsplit index
   &#34;jsoutindex&#34; (sprout) : n,     (numeric) the output index of the joinsplit
   &#34;outindex&#34; (sapling) : n,     (numeric) the output index
@@ -164,6 +168,9 @@ Examples:
               </div>
               <div class="card-body">
                 
+                  <a href="getexperimentalfeatures.html">getexperimentalfeatures</a>
+                  <br>
+                
                   <a href="getinfo.html">getinfo</a>
                   <br>
                 
@@ -187,25 +194,6 @@ Examples:
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
-                Generating
-              </div>
-              <div class="card-body">
-                
-                  <a href="generate.html">generate</a>
-                  <br>
-                
-                  <a href="getgenerate.html">getgenerate</a>
-                  <br>
-                
-                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -486,6 +474,9 @@ Examples:
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -526,6 +517,9 @@ Examples:
                   <br>
                 
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

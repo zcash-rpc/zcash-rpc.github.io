@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 3.0.0 RPC Docs - getdifficulty">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - z_getnotescount">
     <meta name="author" content="">
 
-    <title>getdifficulty - Zcash 3.0.0 RPC Docs</title>
+    <title>z_getnotescount - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,18 +32,24 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getdifficulty - Zcash 3.0.0 RPC</h1>
+            <h1>z_getnotescount - Zcash 3.0.0 RPC</h1>
           
-            <pre>getdifficulty
+            <pre>z_getnotescount
 
-Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
+Arguments:
+1. minconf      (numeric, optional, default=1) Only include notes in transactions confirmed at least this many times.
+
+Returns the number of sprout and sapling notes available in the wallet.
 
 Result:
-n.nnn       (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.
+{
+  &#34;sprout&#34;      (numeric) the number of sprout notes in the wallet
+  &#34;sapling&#34;     (numeric) the number of sapling notes in the wallet
+}
 
 Examples:
-&gt; zcash-cli getdifficulty 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getdifficulty&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli z_getnotescount 0
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;z_getnotescount&#34;, &#34;params&#34;: [0] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.1.2 RPC Docs - z_getpaymentdisclosure">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - z_getpaymentdisclosure">
     <meta name="author" content="">
 
-    <title>z_getpaymentdisclosure - Zcash 2.1.2 RPC Docs</title>
+    <title>z_getpaymentdisclosure - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 3.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_getpaymentdisclosure - Zcash 2.1.2 RPC</h1>
+            <h1>z_getpaymentdisclosure - Zcash 3.0.0 RPC</h1>
           
             <pre>z_getpaymentdisclosure &#34;txid&#34; &#34;js_index&#34; &#34;output_index&#34; (&#34;message&#34;) 
 
@@ -41,9 +41,10 @@ Generate a payment disclosure for a given joinsplit output.
 EXPERIMENTAL FEATURE
 
 WARNING: z_getpaymentdisclosure is disabled.
-To enable it, restart zcashd with the -experimentalfeatures and
--paymentdisclosure commandline options, or add these two lines
-to the zcash.conf file:
+To enable it, restart zcashd with the following command line options:
+-experimentalfeatures and -paymentdisclosure
+
+Alternatively add these two lines to the zcash.conf file:
 
 experimentalfeatures=1
 paymentdisclosure=1
@@ -168,6 +169,9 @@ Examples:
               </div>
               <div class="card-body">
                 
+                  <a href="getexperimentalfeatures.html">getexperimentalfeatures</a>
+                  <br>
+                
                   <a href="getinfo.html">getinfo</a>
                   <br>
                 
@@ -191,25 +195,6 @@ Examples:
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
-                Generating
-              </div>
-              <div class="card-body">
-                
-                  <a href="generate.html">generate</a>
-                  <br>
-                
-                  <a href="getgenerate.html">getgenerate</a>
-                  <br>
-                
-                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -490,6 +475,9 @@ Examples:
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -530,6 +518,9 @@ Examples:
                   <br>
                 
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

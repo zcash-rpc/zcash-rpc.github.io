@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.1.2 RPC Docs - getnetworkinfo">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - getnetworkinfo">
     <meta name="author" content="">
 
-    <title>getnetworkinfo - Zcash 2.1.2 RPC Docs</title>
+    <title>getnetworkinfo - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 3.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getnetworkinfo - Zcash 2.1.2 RPC</h1>
+            <h1>getnetworkinfo - Zcash 3.0.0 RPC</h1>
           
             <pre>getnetworkinfo
 Returns an object containing various state info regarding P2P networking.
@@ -43,7 +43,7 @@ Result:
   &#34;subversion&#34;: &#34;/MagicBean:x.y.z[-v]/&#34;,     (string) the server subversion string
   &#34;protocolversion&#34;: xxxxx,              (numeric) the protocol version
   &#34;localservices&#34;: &#34;xxxxxxxxxxxxxxxx&#34;, (string) the services we offer to the network
-  &#34;timeoffset&#34;: xxxxx,                   (numeric) the time offset
+  &#34;timeoffset&#34;: xxxxx,                   (numeric) the time offset (deprecated; always 0)
   &#34;connections&#34;: xxxxx,                  (numeric) the number of connections
   &#34;networks&#34;: [                          (array) information per network
   {
@@ -177,6 +177,9 @@ Examples:
               </div>
               <div class="card-body">
                 
+                  <a href="getexperimentalfeatures.html">getexperimentalfeatures</a>
+                  <br>
+                
                   <a href="getinfo.html">getinfo</a>
                   <br>
                 
@@ -200,25 +203,6 @@ Examples:
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
-                Generating
-              </div>
-              <div class="card-body">
-                
-                  <a href="generate.html">generate</a>
-                  <br>
-                
-                  <a href="getgenerate.html">getgenerate</a>
-                  <br>
-                
-                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -499,6 +483,9 @@ Examples:
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -539,6 +526,9 @@ Examples:
                   <br>
                 
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>
