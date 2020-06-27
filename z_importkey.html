@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.1.2 RPC Docs - z_importkey">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - z_importkey">
     <meta name="author" content="">
 
-    <title>z_importkey - Zcash 2.1.2 RPC Docs</title>
+    <title>z_importkey - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 3.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_importkey - Zcash 2.1.2 RPC</h1>
+            <h1>z_importkey - Zcash 3.0.0 RPC</h1>
           
             <pre>z_importkey &#34;zkey&#34; ( rescan startHeight )
 
@@ -44,6 +44,12 @@ Arguments:
 3. startHeight        (numeric, optional, default=0) Block height to start rescan from
 
 Note: This call can take minutes to complete if rescan is true.
+
+Result:
+{
+  &#34;type&#34; : &#34;xxxx&#34;,                         (string) &#34;sprout&#34; or &#34;sapling&#34;
+  &#34;address&#34; : &#34;address|DefaultAddress&#34;,    (string) The address corresponding to the spending key (for Sapling, this is the default address).
+}
 
 Examples:
 
@@ -169,6 +175,9 @@ As a JSON-RPC call
               </div>
               <div class="card-body">
                 
+                  <a href="getexperimentalfeatures.html">getexperimentalfeatures</a>
+                  <br>
+                
                   <a href="getinfo.html">getinfo</a>
                   <br>
                 
@@ -192,25 +201,6 @@ As a JSON-RPC call
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
-                Generating
-              </div>
-              <div class="card-body">
-                
-                  <a href="generate.html">generate</a>
-                  <br>
-                
-                  <a href="getgenerate.html">getgenerate</a>
-                  <br>
-                
-                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -491,6 +481,9 @@ As a JSON-RPC call
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -531,6 +524,9 @@ As a JSON-RPC call
                   <br>
                 
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

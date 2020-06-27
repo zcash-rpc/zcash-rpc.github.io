@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 2.1.2 RPC Docs - getblocktemplate">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - getblocktemplate">
     <meta name="author" content="">
 
-    <title>getblocktemplate - Zcash 2.1.2 RPC Docs</title>
+    <title>getblocktemplate - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 2.1.2 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 3.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getblocktemplate - Zcash 2.1.2 RPC</h1>
+            <h1>getblocktemplate - Zcash 3.0.0 RPC</h1>
           
             <pre>getblocktemplate ( &#34;jsonrequestobject&#34; )
 
@@ -55,7 +55,8 @@ Result:
 {
   &#34;version&#34; : n,                     (numeric) The block version
   &#34;previousblockhash&#34; : &#34;xxxx&#34;,    (string) The hash of current highest block
-  &#34;finalsaplingroothash&#34; : &#34;xxxx&#34;, (string) The hash of the final sapling root
+  &#34;lightclientroothash&#34; : &#34;xxxx&#34;, (string) The hash of the light client root field in the block header
+  &#34;finalsaplingroothash&#34; : &#34;xxxx&#34;, (string) (DEPRECATED) The hash of the light client root field in the block header
   &#34;transactions&#34; : [                 (array) contents of non-coinbase transactions that should be included in the next block
       {
          &#34;data&#34; : &#34;xxxx&#34;,          (string) transaction data encoded in hexadecimal (byte-for-byte)
@@ -196,6 +197,9 @@ Examples:
               </div>
               <div class="card-body">
                 
+                  <a href="getexperimentalfeatures.html">getexperimentalfeatures</a>
+                  <br>
+                
                   <a href="getinfo.html">getinfo</a>
                   <br>
                 
@@ -219,25 +223,6 @@ Examples:
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
-                Generating
-              </div>
-              <div class="card-body">
-                
-                  <a href="generate.html">generate</a>
-                  <br>
-                
-                  <a href="getgenerate.html">getgenerate</a>
-                  <br>
-                
-                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
@@ -518,6 +503,9 @@ Examples:
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -558,6 +546,9 @@ Examples:
                   <br>
                 
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

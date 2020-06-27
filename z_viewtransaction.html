@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 3.0.0 RPC Docs - getdifficulty">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - z_viewtransaction">
     <meta name="author" content="">
 
-    <title>getdifficulty - Zcash 3.0.0 RPC Docs</title>
+    <title>z_viewtransaction - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,18 +32,54 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getdifficulty - Zcash 3.0.0 RPC</h1>
+            <h1>z_viewtransaction - Zcash 3.0.0 RPC</h1>
           
-            <pre>getdifficulty
+            <pre>z_viewtransaction &#34;txid&#34;
 
-Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
+Get detailed shielded information about in-wallet transaction &lt;txid&gt;
+
+Arguments:
+1. &#34;txid&#34;    (string, required) The transaction id
 
 Result:
-n.nnn       (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.
+{
+  &#34;txid&#34; : &#34;transactionid&#34;,   (string) The transaction id
+  &#34;spends&#34; : [
+    {
+      &#34;type&#34; : &#34;sprout|sapling&#34;,      (string) The type of address
+      &#34;js&#34; : n,                       (numeric, sprout) the index of the JSDescription within vJoinSplit
+      &#34;jsSpend&#34; : n,                  (numeric, sprout) the index of the spend within the JSDescription
+      &#34;spend&#34; : n,                    (numeric, sapling) the index of the spend within vShieldedSpend
+      &#34;txidPrev&#34; : &#34;transactionid&#34;,   (string) The id for the transaction this note was created in
+      &#34;jsPrev&#34; : n,                   (numeric, sprout) the index of the JSDescription within vJoinSplit
+      &#34;jsOutputPrev&#34; : n,             (numeric, sprout) the index of the output within the JSDescription
+      &#34;outputPrev&#34; : n,               (numeric, sapling) the index of the output within the vShieldedOutput
+      &#34;address&#34; : &#34;zcashaddress&#34;,     (string) The Zcash address involved in the transaction
+      &#34;value&#34; : x.xxx                 (numeric) The amount in ZEC
+      &#34;valueZat&#34; : xxxx               (numeric) The amount in zatoshis
+    }
+    ,...
+  ],
+  &#34;outputs&#34; : [
+    {
+      &#34;type&#34; : &#34;sprout|sapling&#34;,      (string) The type of address
+      &#34;js&#34; : n,                       (numeric, sprout) the index of the JSDescription within vJoinSplit
+      &#34;jsOutput&#34; : n,                 (numeric, sprout) the index of the output within the JSDescription
+      &#34;output&#34; : n,                   (numeric, sapling) the index of the output within the vShieldedOutput
+      &#34;address&#34; : &#34;zcashaddress&#34;,     (string) The Zcash address involved in the transaction
+      &#34;outgoing&#34; : true|false         (boolean, sapling) True if the output is not for an address in the wallet
+      &#34;value&#34; : x.xxx                 (numeric) The amount in ZEC
+      &#34;valueZat&#34; : xxxx               (numeric) The amount in zatoshis
+      &#34;memo&#34; : &#34;hexmemo&#34;,             (string) Hexademical string representation of the memo field
+      &#34;memoStr&#34; : &#34;memo&#34;,             (string) Only returned if memo contains valid UTF-8 text.
+    }
+    ,...
+  ],
+}
 
 Examples:
-&gt; zcash-cli getdifficulty 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getdifficulty&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli z_viewtransaction &#34;1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d&#34;
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;z_viewtransaction&#34;, &#34;params&#34;: [&#34;1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>

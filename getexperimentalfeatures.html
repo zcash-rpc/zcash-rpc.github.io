@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 3.0.0 RPC Docs - getdifficulty">
+    <meta name="description" content="Zcash 3.0.0 RPC Docs - getexperimentalfeatures">
     <meta name="author" content="">
 
-    <title>getdifficulty - Zcash 3.0.0 RPC Docs</title>
+    <title>getexperimentalfeatures - Zcash 3.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,18 +32,21 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getdifficulty - Zcash 3.0.0 RPC</h1>
+            <h1>getexperimentalfeatures - Zcash 3.0.0 RPC</h1>
           
-            <pre>getdifficulty
+            <pre>getexperimentalfeatures
 
-Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
+Returns enabled experimental features.
 
 Result:
-n.nnn       (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.
+  [
+     &#34;experimentalfeature&#34;     (string) The enabled experimental feature
+     ,...
+  ],
 
 Examples:
-&gt; zcash-cli getdifficulty 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getdifficulty&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli getexperimentalfeatures 
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getexperimentalfeatures&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
