@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 3.1.0 RPC Docs - listunspent">
+    <meta name="description" content="Zcash 4.0.0 RPC Docs - listunspent">
     <meta name="author" content="">
 
-    <title>listunspent - Zcash 3.1.0 RPC Docs</title>
+    <title>listunspent - Zcash 4.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 3.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>listunspent - Zcash 3.1.0 RPC</h1>
+            <h1>listunspent - Zcash 4.0.0 RPC</h1>
           
             <pre>listunspent ( minconf maxconf  [&#34;address&#34;,...] )
 
@@ -61,6 +61,7 @@ Result
     &#34;account&#34; : &#34;account&#34;,    (string) DEPRECATED. The associated account, or &#34;&#34; for the default account
     &#34;scriptPubKey&#34; : &#34;key&#34;,   (string) the script key
     &#34;amount&#34; : x.xxx,         (numeric) the transaction amount in ZEC
+    &#34;amountZat&#34; : xxxx        (numeric) the transaction amount in zatoshis
     &#34;confirmations&#34; : n,      (numeric) The number of confirmations
     &#34;redeemScript&#34; : n        (string) The redeemScript if scriptPubKey is P2SH
     &#34;spendable&#34; : xxx         (bool) Whether we have the private keys to spend this output
@@ -189,6 +190,9 @@ Examples
                   <a href="help.html">help</a>
                   <br>
                 
+                  <a href="setlogfilter.html">setlogfilter</a>
+                  <br>
+                
                   <a href="stop.html">stop</a>
                   <br>
                 
@@ -206,6 +210,25 @@ Examples
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
+                  <br>
+                
+              </div>
+            </div>
+            <br>
+          
+            <div class="card">
+              <div class="card-header">
+                Generating
+              </div>
+              <div class="card-body">
+                
+                  <a href="generate.html">generate</a>
+                  <br>
+                
+                  <a href="getgenerate.html">getgenerate</a>
+                  <br>
+                
+                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>

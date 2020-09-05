@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.0.0 RPC Docs - clearbanned">
+    <meta name="description" content="Zcash 4.0.0 RPC Docs - setlogfilter">
     <meta name="author" content="">
 
-    <title>clearbanned - Zcash 4.0.0 RPC Docs</title>
+    <title>setlogfilter - Zcash 4.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,15 +32,30 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>clearbanned - Zcash 4.0.0 RPC</h1>
+            <h1>setlogfilter - Zcash 4.0.0 RPC</h1>
           
-            <pre>clearbanned
+            <pre>setlogfilter &#34;directives&#34;
 
-Clear all banned IPs.
+Sets the filter to be used for selecting events to log.
+
+A filter is a comma-separated list of directives.
+The syntax for each directive is:
+
+    target[span{field=value}]=level
+
+The default filter, derived from the -debug=target flags, is:
+
+    error,main=info
+
+Passing a valid filter here will replace the existing filter.
+Passing an empty string will reset the filter to the default.
+
+Arguments:
+1. newFilterDirectives (string, required) The new log filter.
 
 Examples:
-&gt; zcash-cli clearbanned 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;clearbanned&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli setlogfilter &#34;main=info,rpc=info&#34;
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;setlogfilter&#34;, &#34;params&#34;: [&#34;main=info,rpc=info&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
