@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 3.1.0 RPC Docs - listtransactions">
+    <meta name="description" content="Zcash 4.0.0 RPC Docs - listtransactions">
     <meta name="author" content="">
 
-    <title>listtransactions - Zcash 3.1.0 RPC Docs</title>
+    <title>listtransactions - Zcash 4.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 3.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>listtransactions - Zcash 3.1.0 RPC</h1>
+            <h1>listtransactions - Zcash 4.0.0 RPC</h1>
           
             <pre>listtransactions ( &#34;account&#34; count from includeWatchonly)
 
@@ -60,6 +60,7 @@ Result:
     &#34;amount&#34;: x.xxx,          (numeric) The amount in ZEC. This is negative for the &#39;send&#39; category, and for the
                                          &#39;move&#39; category for moves outbound. It is positive for the &#39;receive&#39; category,
                                          and for the &#39;move&#39; category for inbound funds.
+    &#34;amountZat&#34;: x.xxx,       (numeric) The amount in zatoshis. Negative and positive are the same as &#39;amount&#39; field.
     &#34;vout&#34; : n,               (numeric) the vout value
     &#34;fee&#34;: x.xxx,             (numeric) The amount of the fee in ZEC. This is negative and only available for the 
                                          &#39;send&#39; category of transactions.
@@ -208,6 +209,9 @@ As a json rpc call
                   <a href="help.html">help</a>
                   <br>
                 
+                  <a href="setlogfilter.html">setlogfilter</a>
+                  <br>
+                
                   <a href="stop.html">stop</a>
                   <br>
                 
@@ -225,6 +229,25 @@ As a json rpc call
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
+                  <br>
+                
+              </div>
+            </div>
+            <br>
+          
+            <div class="card">
+              <div class="card-header">
+                Generating
+              </div>
+              <div class="card-body">
+                
+                  <a href="generate.html">generate</a>
+                  <br>
+                
+                  <a href="getgenerate.html">getgenerate</a>
+                  <br>
+                
+                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>

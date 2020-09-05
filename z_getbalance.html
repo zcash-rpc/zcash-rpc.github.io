@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 3.1.0 RPC Docs - z_getbalance">
+    <meta name="description" content="Zcash 4.0.0 RPC Docs - z_getbalance">
     <meta name="author" content="">
 
-    <title>z_getbalance - Zcash 3.1.0 RPC Docs</title>
+    <title>z_getbalance - Zcash 4.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,16 +25,16 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 3.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_getbalance - Zcash 3.1.0 RPC</h1>
+            <h1>z_getbalance - Zcash 4.0.0 RPC</h1>
           
-            <pre>z_getbalance &#34;address&#34; ( minconf )
+            <pre>z_getbalance &#34;address&#34; ( minconf inZat )
 
 Returns the balance of a taddr or zaddr belonging to the node&#39;s wallet.
 
@@ -44,9 +44,10 @@ detected, and so the returned balance may be larger than the actual balance.
 Arguments:
 1. &#34;address&#34;      (string) The selected address. It may be a transparent or private address.
 2. minconf          (numeric, optional, default=1) Only include transactions confirmed at least this many times.
+3. inZat            (bool, optional, default=false) Get the result amount in zatoshis (as an integer).
 
 Result:
-amount              (numeric) The total amount in ZEC received for this address.
+amount              (numeric) The total amount in ZEC(or zatoshis if inZat is true) received at this address.
 
 Examples:
 
@@ -175,6 +176,9 @@ As a json rpc call
                   <a href="help.html">help</a>
                   <br>
                 
+                  <a href="setlogfilter.html">setlogfilter</a>
+                  <br>
+                
                   <a href="stop.html">stop</a>
                   <br>
                 
@@ -192,6 +196,25 @@ As a json rpc call
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
+                  <br>
+                
+              </div>
+            </div>
+            <br>
+          
+            <div class="card">
+              <div class="card-header">
+                Generating
+              </div>
+              <div class="card-body">
+                
+                  <a href="generate.html">generate</a>
+                  <br>
+                
+                  <a href="getgenerate.html">getgenerate</a>
+                  <br>
+                
+                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 3.1.0 RPC Docs - gettransaction">
+    <meta name="description" content="Zcash 4.0.0 RPC Docs - gettransaction">
     <meta name="author" content="">
 
-    <title>gettransaction - Zcash 3.1.0 RPC Docs</title>
+    <title>gettransaction - Zcash 4.0.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 3.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.0.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>gettransaction - Zcash 3.1.0 RPC</h1>
+            <h1>gettransaction - Zcash 4.0.0 RPC</h1>
           
             <pre>gettransaction &#34;txid&#34; ( includeWatchonly )
 
@@ -46,6 +46,7 @@ Result:
 {
   &#34;status&#34; : &#34;mined|waiting|expiringsoon|expired&#34;,    (string) The transaction status, can be &#39;mined&#39;, &#39;waiting&#39;, &#39;expiringsoon&#39; or &#39;expired&#39;
   &#34;amount&#34; : x.xxx,        (numeric) The transaction amount in ZEC
+  &#34;amountZat&#34; : x          (numeric) The amount in zatoshis
   &#34;confirmations&#34; : n,     (numeric) The number of confirmations
   &#34;blockhash&#34; : &#34;hash&#34;,  (string) The block hash
   &#34;blockindex&#34; : xx,       (numeric) The block index
@@ -59,6 +60,7 @@ Result:
       &#34;address&#34; : &#34;zcashaddress&#34;,   (string) The Zcash address involved in the transaction
       &#34;category&#34; : &#34;send|receive&#34;,    (string) The category, either &#39;send&#39; or &#39;receive&#39;
       &#34;amount&#34; : x.xxx                  (numeric) The amount in ZEC
+      &#34;amountZat&#34; : x                   (numeric) The amount in zatoshis
       &#34;vout&#34; : n,                       (numeric) the vout value
     }
     ,...
@@ -198,6 +200,9 @@ Examples:
                   <a href="help.html">help</a>
                   <br>
                 
+                  <a href="setlogfilter.html">setlogfilter</a>
+                  <br>
+                
                   <a href="stop.html">stop</a>
                   <br>
                 
@@ -215,6 +220,25 @@ Examples:
                   <br>
                 
                   <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
+                  <br>
+                
+              </div>
+            </div>
+            <br>
+          
+            <div class="card">
+              <div class="card-header">
+                Generating
+              </div>
+              <div class="card-body">
+                
+                  <a href="generate.html">generate</a>
+                  <br>
+                
+                  <a href="getgenerate.html">getgenerate</a>
+                  <br>
+                
+                  <a href="setgenerate.html">setgenerate</a>
                   <br>
                 
               </div>
