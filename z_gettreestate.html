@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.2.0 RPC Docs - zcrawreceive">
+    <meta name="description" content="Zcash 4.2.0 RPC Docs - z_gettreestate">
     <meta name="author" content="">
 
-    <title>zcrawreceive - Zcash 4.2.0 RPC Docs</title>
+    <title>z_gettreestate - Zcash 4.2.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,18 +32,39 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>zcrawreceive - Zcash 4.2.0 RPC</h1>
+            <h1>z_gettreestate - Zcash 4.2.0 RPC</h1>
           
-            <pre>zcrawreceive zcsecretkey encryptednote
+            <pre>z_gettreestate &#34;hash|height&#34;
+Return information about the given block&#39;s tree state.
 
-DEPRECATED. Decrypts encryptednote and checks if the coin commitments
-are in the blockchain as indicated by the &#34;exists&#34; result.
+Arguments:
+1. &#34;hash|height&#34;          (string, required) The block hash or height. Height can be negative where -1 is the last known valid block
 
-Output: {
-  &#34;amount&#34;: value,
-  &#34;note&#34;: noteplaintext,
-  &#34;exists&#34;: exists
+Result:
+{
+  &#34;hash&#34;: &#34;hash&#34;,         (string) hex block hash
+  &#34;height&#34;: n,            (numeric) block height
+  &#34;sprout&#34;: {
+    &#34;skipHash&#34;: &#34;hash&#34;,   (string) hash of most recent block with more information
+    &#34;commitments&#34;: {
+      &#34;finalRoot&#34;: &#34;hex&#34;, (string)
+      &#34;finalState&#34;: &#34;hex&#34; (string)
+    }
+  },
+  &#34;sapling&#34;: {
+    &#34;skipHash&#34;: &#34;hash&#34;,   (string) hash of most recent block with more information
+    &#34;commitments&#34;: {
+      &#34;finalRoot&#34;: &#34;hex&#34;, (string)
+      &#34;finalState&#34;: &#34;hex&#34; (string)
+    }
+  }
 }
+
+Examples:
+&gt; zcash-cli z_gettreestate &#34;00000000febc373a1da2bd9f887b105ad79ddc26ac26c2b28652d64e5207c5b5&#34;
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;z_gettreestate&#34;, &#34;params&#34;: [&#34;00000000febc373a1da2bd9f887b105ad79ddc26ac26c2b28652d64e5207c5b5&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli z_gettreestate 12800
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;z_gettreestate&#34;, &#34;params&#34;: [12800] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>

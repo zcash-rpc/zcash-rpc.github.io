@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.1.0 RPC Docs - z_shieldcoinbase">
+    <meta name="description" content="Zcash 4.2.0 RPC Docs - z_shieldcoinbase">
     <meta name="author" content="">
 
-    <title>z_shieldcoinbase - Zcash 4.1.0 RPC Docs</title>
+    <title>z_shieldcoinbase - Zcash 4.2.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.2.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_shieldcoinbase - Zcash 4.1.0 RPC</h1>
+            <h1>z_shieldcoinbase - Zcash 4.2.0 RPC</h1>
           
             <pre>z_shieldcoinbase &#34;fromaddress&#34; &#34;tozaddress&#34; ( fee ) ( limit )
 
@@ -45,7 +45,7 @@ transaction size of 100000 bytes before Sapling, and 2000000 bytes once Sapling 
 Arguments:
 1. &#34;fromaddress&#34;         (string, required) The address is a taddr or &#34;*&#34; for all taddrs belonging to the wallet.
 2. &#34;toaddress&#34;           (string, required) The address is a zaddr.
-3. fee                   (numeric, optional, default=0.0001) The fee amount to attach to this transaction.
+3. fee                   (numeric, optional, default=0.00001) The fee amount to attach to this transaction.
 4. limit                 (numeric, optional, default=50) Limit on the maximum number of utxos to shield.  Set to 0 to use as many as will fit in the transaction.
 
 Result:
@@ -158,6 +158,9 @@ Examples:
                   <a href="verifytxoutproof.html">verifytxoutproof</a>
                   <br>
                 
+                  <a href="z_gettreestate.html">z_gettreestate</a>
+                  <br>
+                
               </div>
             </div>
             <br>
@@ -172,6 +175,9 @@ Examples:
                   <br>
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>

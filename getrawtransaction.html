@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.1.0 RPC Docs - getrawtransaction">
+    <meta name="description" content="Zcash 4.2.0 RPC Docs - getrawtransaction">
     <meta name="author" content="">
 
-    <title>getrawtransaction - Zcash 4.1.0 RPC Docs</title>
+    <title>getrawtransaction - Zcash 4.2.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,20 +25,23 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.2.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getrawtransaction - Zcash 4.1.0 RPC</h1>
+            <h1>getrawtransaction - Zcash 4.2.0 RPC</h1>
           
-            <pre>getrawtransaction &#34;txid&#34; ( verbose )
+            <pre>getrawtransaction &#34;txid&#34; ( verbose &#34;blockhash&#34; )
 
-NOTE: By default this function only works sometimes. This is when the tx is in the mempool
-or there is an unspent output in the utxo for this transaction. To make it always work,
-you need to maintain a transaction index, using the -txindex command line option.
+NOTE: If &#34;blockhash&#34; is not provided and the -txindex option is not enabled, then this call only
+works for mempool transactions. If either &#34;blockhash&#34; is provided or the -txindex option is
+enabled, it also works for blockchain transactions. If the block which contains the transaction
+is known, its hash can be provided even for nodes without -txindex. Note that if a blockhash is
+provided, only that block will be searched and if the transaction is in the mempool or other
+blocks, or if this node does not have the given block available, the transaction will not be found.
 
 Return the raw transaction data.
 
@@ -47,15 +50,18 @@ If verbose is non-zero, returns an Object with information about &#39;txid&#39;.
 
 Arguments:
 1. &#34;txid&#34;      (string, required) The transaction id
-2. verbose       (numeric, optional, default=0) If 0, return a string, other return a json object
+2. verbose     (numeric, optional, default=0) If 0, return a string of hex-encoded data, otherwise return a JSON object
+3. &#34;blockhash&#34; (string, optional) The block in which to look for the transaction
 
 Result (if verbose is not set or set to 0):
 &#34;data&#34;      (string) The serialized, hex-encoded data for &#39;txid&#39;
 
 Result (if verbose &gt; 0):
 {
+  &#34;in_active_chain&#34;: b,   (bool) Whether specified block is in the active chain or not (only present with explicit &#34;blockhash&#34; argument)
   &#34;hex&#34; : &#34;data&#34;,       (string) The serialized, hex-encoded data for &#39;txid&#39;
   &#34;txid&#34; : &#34;id&#34;,        (string) The transaction id (same as provided)
+  &#34;size&#34; : n,             (numeric) The transaction size
   &#34;version&#34; : n,          (numeric) The version
   &#34;locktime&#34; : ttt,       (numeric) The lock time
   &#34;expiryheight&#34; : ttt,   (numeric, optional) The block height after which the transaction expires
@@ -125,6 +131,8 @@ Examples:
 &gt; zcash-cli getrawtransaction &#34;mytxid&#34;
 &gt; zcash-cli getrawtransaction &#34;mytxid&#34; 1
 &gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getrawtransaction&#34;, &#34;params&#34;: [&#34;mytxid&#34;, 1] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli getrawtransaction &#34;mytxid&#34; 0 &#34;myblockhash&#34;
+&gt; zcash-cli getrawtransaction &#34;mytxid&#34; 1 &#34;myblockhash&#34;
 
 </pre>
             <hr>
@@ -223,6 +231,9 @@ Examples:
                   <a href="verifytxoutproof.html">verifytxoutproof</a>
                   <br>
                 
+                  <a href="z_gettreestate.html">z_gettreestate</a>
+                  <br>
+                
               </div>
             </div>
             <br>
@@ -237,6 +248,9 @@ Examples:
                   <br>
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>

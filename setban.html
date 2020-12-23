@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.1.0 RPC Docs - setban">
+    <meta name="description" content="Zcash 4.2.0 RPC Docs - setban">
     <meta name="author" content="">
 
-    <title>setban - Zcash 4.1.0 RPC Docs</title>
+    <title>setban - Zcash 4.2.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,24 +25,24 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.2.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>setban - Zcash 4.1.0 RPC</h1>
+            <h1>setban - Zcash 4.2.0 RPC</h1>
           
             <pre>setban &#34;ip(/netmask)&#34; &#34;add|remove&#34; (bantime) (absolute)
 
-Attempts add or remove a IP/Subnet from the banned list.
+Attempts to add or remove an IP/Subnet from the banned list.
 
 Arguments:
-1. &#34;ip(/netmask)&#34; (string, required) The IP/Subnet (see getpeerinfo for nodes ip) with a optional netmask (default is /32 = single ip)
-2. &#34;command&#34;      (string, required) &#39;add&#39; to add a IP/Subnet to the list, &#39;remove&#39; to remove a IP/Subnet from the list
-3. &#34;bantime&#34;      (numeric, optional) time in seconds how long (or until when if [absolute] is set) the ip is banned (0 or empty means using the default time of 24h which can also be overwritten by the -bantime startup argument)
-4. &#34;absolute&#34;     (boolean, optional) If set, the bantime must be a absolute timestamp in seconds since epoch (Jan 1 1970 GMT)
+1. &#34;ip(/netmask)&#34; (string, required) The IP/Subnet (see getpeerinfo for nodes IP) with an optional netmask (default is /32 = single IP)
+2. &#34;command&#34;      (string, required) &#39;add&#39; to add an IP/Subnet to the list, &#39;remove&#39; to remove an IP/Subnet from the list
+3. &#34;bantime&#34;      (numeric, optional) time in seconds how long (or until when if [absolute] is set) the IP is banned (0 or empty means using the default time of 24h which can also be overwritten by the -bantime startup argument)
+4. &#34;absolute&#34;     (boolean, optional) If set, the bantime must be an absolute timestamp in seconds since epoch (Jan 1 1970 GMT)
 
 Examples:
 &gt; zcash-cli setban &#34;192.168.0.6&#34; &#34;add&#34; 86400
@@ -146,6 +146,9 @@ Examples:
                   <a href="verifytxoutproof.html">verifytxoutproof</a>
                   <br>
                 
+                  <a href="z_gettreestate.html">z_gettreestate</a>
+                  <br>
+                
               </div>
             </div>
             <br>
@@ -160,6 +163,9 @@ Examples:
                   <br>
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>

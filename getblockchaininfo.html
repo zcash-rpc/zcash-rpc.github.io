@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.1.0 RPC Docs - getblockchaininfo">
+    <meta name="description" content="Zcash 4.2.0 RPC Docs - getblockchaininfo">
     <meta name="author" content="">
 
-    <title>getblockchaininfo - Zcash 4.1.0 RPC Docs</title>
+    <title>getblockchaininfo - Zcash 4.2.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.2.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getblockchaininfo - Zcash 4.1.0 RPC</h1>
+            <h1>getblockchaininfo - Zcash 4.2.0 RPC</h1>
           
             <pre>getblockchaininfo
 Returns an object containing various state info regarding block chain processing.
@@ -44,6 +44,7 @@ Result:
 {
   &#34;chain&#34;: &#34;xxxx&#34;,        (string) current network name as defined in BIP70 (main, test, regtest)
   &#34;blocks&#34;: xxxxxx,         (numeric) the current number of blocks processed in the server
+  &#34;initial_block_download_complete&#34;: xx, (boolean) true if the initial download of the blockchain is complete
   &#34;headers&#34;: xxxxxx,        (numeric) the current number of headers we have validated
   &#34;bestblockhash&#34;: &#34;...&#34;, (string) the hash of the currently best block
   &#34;difficulty&#34;: xxxxxx,     (numeric) the current difficulty
@@ -180,6 +181,9 @@ Examples:
                   <a href="verifytxoutproof.html">verifytxoutproof</a>
                   <br>
                 
+                  <a href="z_gettreestate.html">z_gettreestate</a>
+                  <br>
+                
               </div>
             </div>
             <br>
@@ -194,6 +198,9 @@ Examples:
                   <br>
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>
