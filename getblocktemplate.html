@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.1.0 RPC Docs - getblocktemplate">
+    <meta name="description" content="Zcash 4.2.0 RPC Docs - getblocktemplate">
     <meta name="author" content="">
 
-    <title>getblocktemplate - Zcash 4.1.0 RPC Docs</title>
+    <title>getblocktemplate - Zcash 4.2.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.2.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getblocktemplate - Zcash 4.1.0 RPC</h1>
+            <h1>getblocktemplate - Zcash 4.2.0 RPC</h1>
           
             <pre>getblocktemplate ( &#34;jsonrequestobject&#34; )
 
@@ -40,29 +40,34 @@ If the request parameters include a &#39;mode&#39; key, that is used to explicit
 It returns data needed to construct a block to work on.
 See https://en.bitcoin.it/wiki/BIP_0022 for full specification.
 
+To obtain information about founder&#39;s reward or funding stream
+amounts, use &#39;getblocksubsidy HEIGHT&#39; passing in the height returned
+by this API.
+
 Arguments:
 1. &#34;jsonrequestobject&#34;       (string, optional) A json object in the following spec
      {
-       &#34;mode&#34;:&#34;template&#34;    (string, optional) This must be set to &#34;template&#34; or omitted
-       &#34;capabilities&#34;:[       (array, optional) A list of strings
-           &#34;support&#34;           (string) client side supported feature, &#39;longpoll&#39;, &#39;coinbasetxn&#39;, &#39;coinbasevalue&#39;, &#39;proposal&#39;, &#39;serverlist&#39;, &#39;workid&#39;
+       &#34;mode&#34;:&#34;template,&#34;    (string, optional) This must be set to &#34;template&#34; or omitted
+       &#34;capabilities&#34;:[      (array, optional) A list of strings
+           &#34;support&#34;         (string) client side supported feature, &#39;longpoll&#39;, &#39;coinbasetxn&#39;, &#39;coinbasevalue&#39;, &#39;proposal&#39;, &#39;serverlist&#39;, &#39;workid&#39;
            ,...
-         ]
+         ],
+       &#34;longpollid&#34;:&#34;id&#34;     (string, optional) id to wait for
      }
 
 
 Result:
 {
   &#34;version&#34; : n,                     (numeric) The block version
-  &#34;previousblockhash&#34; : &#34;xxxx&#34;,    (string) The hash of current highest block
-  &#34;lightclientroothash&#34; : &#34;xxxx&#34;, (string) The hash of the light client root field in the block header
-  &#34;finalsaplingroothash&#34; : &#34;xxxx&#34;, (string) (DEPRECATED) The hash of the light client root field in the block header
+  &#34;previousblockhash&#34; : &#34;xxxx&#34;,      (string) The hash of current highest block
+  &#34;lightclientroothash&#34; : &#34;xxxx&#34;,    (string) The hash of the light client root field in the block header
+  &#34;finalsaplingroothash&#34; : &#34;xxxx&#34;,   (string) (DEPRECATED) The hash of the light client root field in the block header
   &#34;transactions&#34; : [                 (array) contents of non-coinbase transactions that should be included in the next block
       {
-         &#34;data&#34; : &#34;xxxx&#34;,          (string) transaction data encoded in hexadecimal (byte-for-byte)
-         &#34;hash&#34; : &#34;xxxx&#34;,          (string) hash/id encoded in little-endian hexadecimal
-         &#34;depends&#34; : [              (array) array of numbers 
-             n                        (numeric) transactions before this one (by 1-based index in &#39;transactions&#39; list) that must be present in the final block if this one is
+         &#34;data&#34; : &#34;xxxx&#34;,            (string) transaction data encoded in hexadecimal (byte-for-byte)
+         &#34;hash&#34; : &#34;xxxx&#34;,            (string) hash/id encoded in little-endian hexadecimal
+         &#34;depends&#34; : [               (array) array of numbers 
+             n                       (numeric) transactions before this one (by 1-based index in &#39;transactions&#39; list) that must be present in the final block if this one is
              ,...
          ],
          &#34;fee&#34;: n,                   (numeric) difference in value between transaction inputs and outputs (in Satoshis); for coinbase transactions, this is a negative Number of the total collected block fees (ie, not including the block subsidy); if key is not present, fee is unknown and clients MUST NOT assume there isn&#39;t one
@@ -72,18 +77,19 @@ Result:
       ,...
   ],
   &#34;coinbasetxn&#34; : { ... },           (json object) information for coinbase transaction
-  &#34;target&#34; : &#34;xxxx&#34;,               (string) The hash target
+  &#34;target&#34; : &#34;xxxx&#34;,                 (string) The hash target
+  &#34;longpollid&#34; : &#34;str&#34;,              (string) an id to include with a request to longpoll on an update to this template
   &#34;mintime&#34; : xxx,                   (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)
   &#34;mutable&#34; : [                      (array of string) list of ways the block template may be changed 
      &#34;value&#34;                         (string) A way the block template may be changed, e.g. &#39;time&#39;, &#39;transactions&#39;, &#39;prevblock&#39;
      ,...
   ],
-  &#34;noncerange&#34; : &#34;00000000ffffffff&#34;,   (string) A range of valid nonces
-  &#34;sigoplimit&#34; : n,                 (numeric) limit of sigops in blocks
-  &#34;sizelimit&#34; : n,                  (numeric) limit of block size
-  &#34;curtime&#34; : ttt,                  (numeric) current timestamp in seconds since epoch (Jan 1 1970 GMT)
-  &#34;bits&#34; : &#34;xxx&#34;,                 (string) compressed target of next block
-  &#34;height&#34; : n                      (numeric) The height of the next block
+  &#34;noncerange&#34; : &#34;00000000ffffffff&#34;, (string) A range of valid nonces
+  &#34;sigoplimit&#34; : n,                  (numeric) limit of sigops in blocks
+  &#34;sizelimit&#34; : n,                   (numeric) limit of block size
+  &#34;curtime&#34; : ttt,                   (numeric) current timestamp in seconds since epoch (Jan 1 1970 GMT)
+  &#34;bits&#34; : &#34;xxx&#34;,                    (string) compressed target of next block
+  &#34;height&#34; : n                       (numeric) The height of the next block
 }
 
 Examples:
@@ -187,6 +193,9 @@ Examples:
                   <a href="verifytxoutproof.html">verifytxoutproof</a>
                   <br>
                 
+                  <a href="z_gettreestate.html">z_gettreestate</a>
+                  <br>
+                
               </div>
             </div>
             <br>
@@ -201,6 +210,9 @@ Examples:
                   <br>
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>

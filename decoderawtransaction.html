@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.1.0 RPC Docs - decoderawtransaction">
+    <meta name="description" content="Zcash 4.2.0 RPC Docs - decoderawtransaction">
     <meta name="author" content="">
 
-    <title>decoderawtransaction - Zcash 4.1.0 RPC Docs</title>
+    <title>decoderawtransaction - Zcash 4.2.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.1.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.2.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>decoderawtransaction - Zcash 4.1.0 RPC</h1>
+            <h1>decoderawtransaction - Zcash 4.2.0 RPC</h1>
           
             <pre>decoderawtransaction &#34;hexstring&#34;
 
@@ -44,6 +44,7 @@ Arguments:
 Result:
 {
   &#34;txid&#34; : &#34;id&#34;,        (string) The transaction id
+  &#34;size&#34; : n,             (numeric) The transaction size
   &#34;overwintered&#34; : bool   (boolean) The Overwintered flag
   &#34;version&#34; : n,          (numeric) The version
   &#34;versiongroupid&#34;: &#34;hex&#34;   (string, optional) The version group id (Overwintered txs)
@@ -208,6 +209,9 @@ Examples:
                   <a href="verifytxoutproof.html">verifytxoutproof</a>
                   <br>
                 
+                  <a href="z_gettreestate.html">z_gettreestate</a>
+                  <br>
+                
               </div>
             </div>
             <br>
@@ -222,6 +226,9 @@ Examples:
                   <br>
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>
