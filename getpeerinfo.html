@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.3.0 RPC Docs - getpeerinfo">
+    <meta name="description" content="Zcash 4.4.0 RPC Docs - getpeerinfo">
     <meta name="author" content="">
 
-    <title>getpeerinfo - Zcash 4.3.0 RPC Docs</title>
+    <title>getpeerinfo - Zcash 4.4.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.3.0 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.4.0 RPC docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getpeerinfo - Zcash 4.3.0 RPC</h1>
+            <h1>getpeerinfo - Zcash 4.4.0 RPC</h1>
           
             <pre>getpeerinfo
 
@@ -45,6 +45,7 @@ bResult:
     &#34;addr&#34;:&#34;host:port&#34;,      (string) The IP address and port of the peer
     &#34;addrlocal&#34;:&#34;ip:port&#34;,   (string) local address
     &#34;services&#34;:&#34;xxxxxxxxxxxxxxxx&#34;,   (string) The services offered
+    &#34;relaytxes&#34;:true|false,    (boolean) Whether peer has asked us to relay transactions to it
     &#34;lastsend&#34;: ttt,           (numeric) The time in seconds since epoch (Jan 1 1970 GMT) of the last send
     &#34;lastrecv&#34;: ttt,           (numeric) The time in seconds since epoch (Jan 1 1970 GMT) of the last receive
     &#34;bytessent&#34;: n,            (numeric) The total bytes sent
