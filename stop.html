@@ -37,6 +37,18 @@
             <pre>stop
 
 Stop Zcash server.
+
+Result:
+{
+  &#34;result&#34;: xxxxx              (string) Status message
+  &#34;error&#34;: xxxxx               (numeric) Error number
+  &#34;id&#34;: xxxxx                  (string) Current id 
+}
+
+Examples:
+> zcash-cli stop
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "stop", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8232/
+
 </pre>
             <hr>
           
