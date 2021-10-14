@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.4.0 RPC Docs - getblocktemplate">
+    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - getblocktemplate">
     <meta name="author" content="">
 
-    <title>getblocktemplate - Zcash 4.4.0 RPC Docs</title>
+    <title>getblocktemplate - Zcash 4.5.1-1 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,7 +32,7 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getblocktemplate - Zcash 4.4.0 RPC</h1>
+            <h1>getblocktemplate - Zcash 4.5.1-1 RPC</h1>
           
             <pre>getblocktemplate ( &#34;jsonrequestobject&#34; )
 
@@ -60,7 +60,8 @@ Result:
 {
   &#34;version&#34; : n,                     (numeric) The block version
   &#34;previousblockhash&#34; : &#34;xxxx&#34;,      (string) The hash of current highest block
-  &#34;lightclientroothash&#34; : &#34;xxxx&#34;,    (string) The hash of the light client root field in the block header
+  &#34;blockcommitmentshash&#34; : &#34;xxxx&#34;,   (string) The hash of the block commitments field in the block header
+  &#34;lightclientroothash&#34; : &#34;xxxx&#34;,    (string) (DEPRECATED) The hash of the light client root field in the block header
   &#34;finalsaplingroothash&#34; : &#34;xxxx&#34;,   (string) (DEPRECATED) The hash of the light client root field in the block header
   &#34;transactions&#34; : [                 (array) contents of non-coinbase transactions that should be included in the next block
       {
@@ -100,10 +101,10 @@ Examples:
             <hr>
           
           <p>
-          Maintained by <a href="https://twitter.com/_garethtdavies">@_garethtdavies</a>; license of the docs is MIT (see <a href="https://github.com/zcash/zcash">zcash repo</a>), license of the scripts and webpage is also MIT (<a href="https://github.com/zcash-rpc/zcash-rpc.github.io">github repo</a>)
+          Maintained by <a href="https://twitter.com/_garethtdavies">@_garethtdavies</a>; modified by: <a href="https://github.com/mdr0id">mdr0id</a>;license of the docs is MIT (see <a href="https://github.com/zcash/zcash">zcash repo</a>), license of the scripts and webpage is also MIT (<a href="https://github.com/zcash-rpc/zcash-rpc.github.io">github repo</a>)
           </p>
           <p>
-          Note it uses a mainnet node
+          Note it uses a mainnet zcash node
           </p>
         </div>
         <div class="col-4 col-lg-3 col-xl-2">
@@ -423,15 +424,6 @@ Examples:
                   <a href="encryptwallet.html">encryptwallet</a>
                   <br>
                 
-                  <a href="getaccount.html">getaccount</a>
-                  <br>
-                
-                  <a href="getaccountaddress.html">getaccountaddress</a>
-                  <br>
-                
-                  <a href="getaddressesbyaccount.html">getaddressesbyaccount</a>
-                  <br>
-                
                   <a href="getbalance.html">getbalance</a>
                   <br>
                 
@@ -439,9 +431,6 @@ Examples:
                   <br>
                 
                   <a href="getrawchangeaddress.html">getrawchangeaddress</a>
-                  <br>
-                
-                  <a href="getreceivedbyaccount.html">getreceivedbyaccount</a>
                   <br>
                 
                   <a href="getreceivedbyaddress.html">getreceivedbyaddress</a>
@@ -471,16 +460,13 @@ Examples:
                   <a href="keypoolrefill.html">keypoolrefill</a>
                   <br>
                 
-                  <a href="listaccounts.html">listaccounts</a>
+                  <a href="listaddresses.html">listaddresses</a>
                   <br>
                 
                   <a href="listaddressgroupings.html">listaddressgroupings</a>
                   <br>
                 
                   <a href="listlockunspent.html">listlockunspent</a>
-                  <br>
-                
-                  <a href="listreceivedbyaccount.html">listreceivedbyaccount</a>
                   <br>
                 
                   <a href="listreceivedbyaddress.html">listreceivedbyaddress</a>
@@ -498,19 +484,10 @@ Examples:
                   <a href="lockunspent.html">lockunspent</a>
                   <br>
                 
-                  <a href="move.html">move</a>
-                  <br>
-                
-                  <a href="sendfrom.html">sendfrom</a>
-                  <br>
-                
                   <a href="sendmany.html">sendmany</a>
                   <br>
                 
                   <a href="sendtoaddress.html">sendtoaddress</a>
-                  <br>
-                
-                  <a href="setaccount.html">setaccount</a>
                   <br>
                 
                   <a href="settxfee.html">settxfee</a>
