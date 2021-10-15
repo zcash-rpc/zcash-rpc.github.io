@@ -91,7 +91,7 @@ func open(path string) io.Writer {
 }
 
 func run(args ...string) string {
-	out, err := exec.Command("/usr/bin/zcash-cli", args...).CombinedOutput()
+	out, err := exec.Command("/home/marsh/v4.5.1-1_github_docs/zcash/src/zcash-cli", args...).CombinedOutput()
 	if err != nil {
 		panic(err)
 	}
