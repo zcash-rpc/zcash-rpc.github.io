@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - gettxoutsetinfo">
+    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - listaddresses">
     <meta name="author" content="">
 
-    <title>gettxoutsetinfo - Zcash 4.5.1-1 RPC Docs</title>
+    <title>listaddresses - Zcash 4.5.1-1 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,27 +32,50 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>gettxoutsetinfo - Zcash 4.5.1-1 RPC</h1>
+            <h1>listaddresses - Zcash 4.5.1-1 RPC</h1>
           
-            <pre>gettxoutsetinfo
+            <pre>listaddresses
 
-Returns statistics about the unspent transaction output set.
-Note this call may take some time.
+Lists the addresses managed by this wallet by source, including 
+those generated from randomness by this wallet, Sapling addresses 
+generated from the legacy HD seed, imported watchonly transparent 
+addresses, shielded addresses tracked using imported viewing keys, 
+and addresses derived from the wallet&#39;s mnemonic seed for releases 
+version 4.5.2 and above. 
+
+REMINDER: It is recommended that you back up your wallet.dat file 
+regularly!
 
 Result:
-{
-  &#34;height&#34;:n,     (numeric) The current block height (index)
-  &#34;bestblock&#34;: &#34;hex&#34;,   (string) the best block hash hex
-  &#34;transactions&#34;: n,      (numeric) The number of transactions
-  &#34;txouts&#34;: n,            (numeric) The number of output transactions
-  &#34;bytes_serialized&#34;: n,  (numeric) The serialized size
-  &#34;hash_serialized&#34;: &#34;hash&#34;,   (string) The serialized hash
-  &#34;total_amount&#34;: x.xxx          (numeric) The total amount
-}
+[
+  {
+    &#34;source&#34;: &#34;imported|imported_watchonly|keypool|legacy_seed|mnemonic_seed&#34;
+    &#34;transparent&#34;: {
+      &#34;addresses&#34;: [&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1&#34;, ...],
+      &#34;changeAddresses&#34;: [&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1&#34;, ...]
+    },
+    &#34;sprout&#34;: {
+      &#34;addresses&#34;: [&#34;ztbx5DLDxa5ZLFTchHhoPNkKs57QzSyib6UqXpEdy76T1aUdFxJt1w9318Z8DJ73XzbnWHKEZP9Yjg712N5kMmP4QzS9iC9&#34;, ...]
+    },
+    &#34;sapling&#34;: [ -- each element in this list represents a set of diversified addresses derived from a single IVK. 
+      {
+        &#34;zip32AccountId&#34;: 0, -- optional field, not present for imported/watchonly sources,
+        &#34;addresses&#34;: [
+          &#34;ztbx5DLDxa5ZLFTchHhoPNkKs57QzSyib6UqXpEdy76T1aUdFxJt1w9318Z8DJ73XzbnWHKEZP9Yjg712N5kMmP4QzS9iC9&#34;,
+          ...
+        ]
+      },
+      ...
+    ]
+  },
+  ...
+]
+In the case that a source does not have addresses for a pool, the key
+associated with that pool will be absent.
 
 Examples:
-&gt; zcash-cli gettxoutsetinfo 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;gettxoutsetinfo&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli listaddresses 
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;listaddresses&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
 
 </pre>
             <hr>
