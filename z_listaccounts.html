@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.7.0 RPC Docs - getgenerate">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - z_listaccounts">
     <meta name="author" content="">
 
-    <title>getgenerate - Zcash 4.7.0 RPC Docs</title>
+    <title>z_listaccounts - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -32,20 +32,27 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getgenerate - Zcash 4.7.0 RPC</h1>
+            <h1>z_listaccounts - Zcash 4.7.0 RPC</h1>
           
-            <pre>getgenerate
+            <pre>z_listaccounts
 
-Return if the server is set to generate coins or not. The default is false.
-It is set with the command line argument -gen (or zcash.conf setting gen)
-It can also be set with the setgenerate call.
+Returns the list of accounts created through z_getnewaccount.
 
-Result
-true|false      (boolean) If the server is set to generate coins or not
+Result:
+[
+   {
+     &#34;account&#34;: &#34;uint&#34;,           (uint) The account id
+     &#34;addresses&#34;: [
+        {
+           &#34;diversifier&#34;:  &#34;uint&#34;,        (string) A diversifier used in the account
+           &#34;ua&#34;:  &#34;address&#34;,              (string) The unified address corresponding to the diversifier.
+        }
+     ]
+   }
+]
 
 Examples:
-&gt; zcash-cli getgenerate 
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getgenerate&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:8232/
+&gt; zcash-cli z_listaccounts 
 
 </pre>
             <hr>

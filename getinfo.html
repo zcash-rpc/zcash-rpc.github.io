@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - getinfo">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - getinfo">
     <meta name="author" content="">
 
-    <title>getinfo - Zcash 4.5.1-1 RPC Docs</title>
+    <title>getinfo - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.5.1-1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.7.0 RPC Docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getinfo - Zcash 4.5.1-1 RPC</h1>
+            <h1>getinfo - Zcash 4.7.0 RPC</h1>
           
             <pre>getinfo
 Returns an object containing various state info.
@@ -40,21 +40,24 @@ Returns an object containing various state info.
 Result:
 {
   &#34;version&#34;: xxxxx,           (numeric) the server version
+  &#34;build&#34;: xxxxx,             (string)  the build number
+  &#34;subversion&#34;: xxxxx,        (string)  the server sub-version identifier
   &#34;protocolversion&#34;: xxxxx,   (numeric) the protocol version
-  &#34;walletversion&#34;: xxxxx,     (numeric) the wallet version
-  &#34;balance&#34;: xxxxxxx,         (numeric) the total Zcash balance of the wallet
+  &#34;walletversion&#34;: xxxxx,     (numeric, optional) the wallet version, if wallet functionality is enabled
+  &#34;balance&#34;: xxxxxxx,         (numeric, optional) the total Zcash balance of the wallet, if wallet functionality is enabled
   &#34;blocks&#34;: xxxxxx,           (numeric) the current number of blocks processed in the server
   &#34;timeoffset&#34;: xxxxx,        (numeric) the time offset (deprecated; always 0)
   &#34;connections&#34;: xxxxx,       (numeric) the number of connections
   &#34;proxy&#34;: &#34;host:port&#34;,     (string, optional) the proxy used by the server
   &#34;difficulty&#34;: xxxxxx,       (numeric) the current difficulty
   &#34;testnet&#34;: true|false,      (boolean) if the server is using testnet or not
-  &#34;keypoololdest&#34;: xxxxxx,    (numeric) the timestamp (seconds since GMT epoch) of the oldest pre-generated key in the key pool
-  &#34;keypoolsize&#34;: xxxx,        (numeric) how many new keys are pre-generated
-  &#34;unlocked_until&#34;: ttt,      (numeric) the timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked
+  &#34;keypoololdest&#34;: xxxxxx,    (numeric, optional) the timestamp (seconds since GMT epoch) of the oldest pre-generated key in the key pool, if wallet functionality is enabled
+  &#34;keypoolsize&#34;: xxxx,        (numeric, optional) how many new keys are pre-generated
+  &#34;unlocked_until&#34;: ttt,      (numeric, optional) the timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked, if wallet functionality is available and the wallet is encrypted
   &#34;paytxfee&#34;: x.xxxx,         (numeric) the transaction fee set in ZEC/kB
   &#34;relayfee&#34;: x.xxxx,         (numeric) minimum relay fee for non-free transactions in ZEC/kB
-  &#34;errors&#34;: &#34;...&#34;           (string) any error messages
+  &#34;errors&#34;: &#34;...&#34;           (string) message describing the latest or highest-priority error
+  &#34;errorstimestamp&#34;: &#34;...&#34;  (string) timestamp associated with the latest or highest-priority error
 }
 
 Examples:
@@ -460,6 +463,9 @@ Examples:
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
+                  <a href="walletconfirmbackup.html">walletconfirmbackup</a>
+                  <br>
+                
                   <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
@@ -469,10 +475,22 @@ Examples:
                   <a href="z_exportwallet.html">z_exportwallet</a>
                   <br>
                 
+                  <a href="z_getaddressforaccount.html">z_getaddressforaccount</a>
+                  <br>
+                
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getbalanceforaccount.html">z_getbalanceforaccount</a>
+                  <br>
+                
+                  <a href="z_getbalanceforviewingkey.html">z_getbalanceforviewingkey</a>
+                  <br>
+                
                   <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
+                  <a href="z_getnewaccount.html">z_getnewaccount</a>
                   <br>
                 
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
@@ -499,6 +517,9 @@ Examples:
                   <a href="z_importwallet.html">z_importwallet</a>
                   <br>
                 
+                  <a href="z_listaccounts.html">z_listaccounts</a>
+                  <br>
+                
                   <a href="z_listaddresses.html">z_listaddresses</a>
                   <br>
                 
@@ -506,6 +527,9 @@ Examples:
                   <br>
                 
                   <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunifiedreceivers.html">z_listunifiedreceivers</a>
                   <br>
                 
                   <a href="z_listunspent.html">z_listunspent</a>

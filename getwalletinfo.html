@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - getwalletinfo">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - getwalletinfo">
     <meta name="author" content="">
 
-    <title>getwalletinfo - Zcash 4.5.1-1 RPC Docs</title>
+    <title>getwalletinfo - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.5.1-1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.7.0 RPC Docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>getwalletinfo - Zcash 4.5.1-1 RPC</h1>
+            <h1>getwalletinfo - Zcash 4.7.0 RPC</h1>
           
             <pre>getwalletinfo
 Returns an object containing various wallet state info.
@@ -50,7 +50,10 @@ Result:
   &#34;keypoolsize&#34;: xxxx,        (numeric) how many new keys are pre-generated
   &#34;unlocked_until&#34;: ttt,      (numeric) the timestamp in seconds since epoch (midnight Jan 1 1970 GMT) that the wallet is unlocked for transfers, or 0 if the wallet is locked
   &#34;paytxfee&#34;: x.xxxx,         (numeric) the transaction fee configuration, set in ZEC/kB
-  &#34;seedfp&#34;: &#34;uint256&#34;,        (string) the BLAKE2b-256 hash of the HD seed
+  &#34;mnemonic_seedfp&#34;: &#34;uint256&#34;, (string) the BLAKE2b-256 hash of the HD seed derived from the wallet&#39;s emergency recovery phrase
+  &#34;legacy_seedfp&#34;: &#34;uint256&#34;,   (string, optional) if this wallet was created prior to release 4.5.2, this will contain the BLAKE2b-256
+                                    hash of the legacy HD seed that was used to derive Sapling addresses prior to the 4.5.2 upgrade to mnemonic
+                                    emergency recovery phrases. This field was previously named &#34;seedfp&#34;.
 }
 
 Examples:
@@ -456,6 +459,9 @@ Examples:
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
+                  <a href="walletconfirmbackup.html">walletconfirmbackup</a>
+                  <br>
+                
                   <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
@@ -465,10 +471,22 @@ Examples:
                   <a href="z_exportwallet.html">z_exportwallet</a>
                   <br>
                 
+                  <a href="z_getaddressforaccount.html">z_getaddressforaccount</a>
+                  <br>
+                
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getbalanceforaccount.html">z_getbalanceforaccount</a>
+                  <br>
+                
+                  <a href="z_getbalanceforviewingkey.html">z_getbalanceforviewingkey</a>
+                  <br>
+                
                   <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
+                  <a href="z_getnewaccount.html">z_getnewaccount</a>
                   <br>
                 
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
@@ -495,6 +513,9 @@ Examples:
                   <a href="z_importwallet.html">z_importwallet</a>
                   <br>
                 
+                  <a href="z_listaccounts.html">z_listaccounts</a>
+                  <br>
+                
                   <a href="z_listaddresses.html">z_listaddresses</a>
                   <br>
                 
@@ -502,6 +523,9 @@ Examples:
                   <br>
                 
                   <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunifiedreceivers.html">z_listunifiedreceivers</a>
                   <br>
                 
                   <a href="z_listunspent.html">z_listunspent</a>

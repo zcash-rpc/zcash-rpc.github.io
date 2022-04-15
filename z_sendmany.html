@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - z_sendmany">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - z_sendmany">
     <meta name="author" content="">
 
-    <title>z_sendmany - Zcash 4.5.1-1 RPC Docs</title>
+    <title>z_sendmany - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,16 +25,16 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.5.1-1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.7.0 RPC Docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_sendmany - Zcash 4.5.1-1 RPC</h1>
+            <h1>z_sendmany - Zcash 4.7.0 RPC</h1>
           
-            <pre>z_sendmany &#34;fromaddress&#34; [{&#34;address&#34;:... ,&#34;amount&#34;:...},...] ( minconf ) ( fee )
+            <pre>z_sendmany &#34;fromaddress&#34; [{&#34;address&#34;:... ,&#34;amount&#34;:...},...] ( minconf ) ( fee ) ( privacyPolicy )
 
 Send multiple times. Amounts are decimal numbers with at most 8 digits of precision.
 Change generated from one or more transparent addresses flows to a new transparent
@@ -49,14 +49,35 @@ Arguments:
                            The following special strings are also accepted:
                                - &#34;ANY_TADDR&#34;: Select non-coinbase UTXOs from any transparent addresses belonging to the wallet.
                                               Use z_shieldcoinbase to shield coinbase UTXOs from multiple transparent addresses.
+                           If the address is a UA, transfer from the most recent value pool with sufficient funds
 2. &#34;amounts&#34;             (array, required) An array of json objects representing the amounts to send.
     [{
-      &#34;address&#34;:address  (string, required) The address is a taddr or zaddr
+      &#34;address&#34;:address  (string, required) The address is a taddr, zaddr, or Unified Address
       &#34;amount&#34;:amount    (numeric, required) The numeric amount in ZEC is the value
       &#34;memo&#34;:memo        (string, optional) If the address is a zaddr, raw data represented in hexadecimal string format
     }, ... ]
 3. minconf               (numeric, optional, default=1) Only use funds confirmed at least this many times.
 4. fee                   (numeric, optional, default=0.00001) The fee amount to attach to this transaction.
+5. privacyPolicy         (string, optional, default=&#34;LegacyCompat&#34;) Policy for what information leakage is acceptable.
+                         One of the following strings:
+                               - &#34;FullPrivacy&#34;: Only allow fully-shielded transactions (involving a single shielded value pool).
+                               - &#34;LegacyCompat&#34;: If the transaction involves any Unified Addresses, this is equivalent to
+                                 &#34;FullPrivacy&#34;. Otherwise, this is equivalent to &#34;AllowFullyTransparent&#34;.
+                               - &#34;AllowRevealedAmounts&#34;: Allow funds to cross between shielded value pools, revealing the amount
+                                 that crosses pools.
+                               - &#34;AllowRevealedRecipients&#34;: Allow transparent recipients. This also implies revealing
+                                 information described under &#34;AllowRevealedAmounts&#34;.
+                               - &#34;AllowRevealedSenders&#34;: Allow transparent funds to be spent, revealing the sending
+                                 addresses and amounts. This implies revealing information described under &#34;AllowRevealedAmounts&#34;.
+                               - &#34;AllowFullyTransparent&#34;: Allow transaction to both spend transparent funds and have
+                                 transparent recipients. This implies revealing information described under &#34;AllowRevealedSenders&#34;
+                                 and &#34;AllowRevealedRecipients&#34;.
+                               - &#34;AllowLinkingAccountAddresses&#34;: Allow selecting transparent coins from the full account,
+                                 rather than just the funds sent to the transparent receiver in the provided Unified Address.
+                                 This implies revealing information described under &#34;AllowRevealedSenders&#34;.
+                               - &#34;NoPrivacy&#34;: Allow the transaction to reveal any information necessary to create it.
+                                 This implies revealing information described under &#34;AllowFullyTransparent&#34; and
+                                 &#34;AllowLinkingAccountAddresses&#34;.
 
 Result:
 &#34;operationid&#34;          (string) An operationid to pass to z_getoperationstatus to get the result of the operation.
@@ -465,6 +486,9 @@ Examples:
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
+                  <a href="walletconfirmbackup.html">walletconfirmbackup</a>
+                  <br>
+                
                   <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
@@ -474,10 +498,22 @@ Examples:
                   <a href="z_exportwallet.html">z_exportwallet</a>
                   <br>
                 
+                  <a href="z_getaddressforaccount.html">z_getaddressforaccount</a>
+                  <br>
+                
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getbalanceforaccount.html">z_getbalanceforaccount</a>
+                  <br>
+                
+                  <a href="z_getbalanceforviewingkey.html">z_getbalanceforviewingkey</a>
+                  <br>
+                
                   <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
+                  <a href="z_getnewaccount.html">z_getnewaccount</a>
                   <br>
                 
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
@@ -504,6 +540,9 @@ Examples:
                   <a href="z_importwallet.html">z_importwallet</a>
                   <br>
                 
+                  <a href="z_listaccounts.html">z_listaccounts</a>
+                  <br>
+                
                   <a href="z_listaddresses.html">z_listaddresses</a>
                   <br>
                 
@@ -511,6 +550,9 @@ Examples:
                   <br>
                 
                   <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunifiedreceivers.html">z_listunifiedreceivers</a>
                   <br>
                 
                   <a href="z_listunspent.html">z_listunspent</a>

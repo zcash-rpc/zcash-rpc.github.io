@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - z_importviewingkey">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - z_importviewingkey">
     <meta name="author" content="">
 
-    <title>z_importviewingkey - Zcash 4.5.1-1 RPC Docs</title>
+    <title>z_importviewingkey - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.5.1-1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.7.0 RPC Docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_importviewingkey - Zcash 4.5.1-1 RPC</h1>
+            <h1>z_importviewingkey - Zcash 4.7.0 RPC</h1>
           
             <pre>z_importviewingkey &#34;vkey&#34; ( rescan startHeight )
 
@@ -43,11 +43,12 @@ Arguments:
 2. rescan             (string, optional, default=&#34;whenkeyisnew&#34;) Rescan the wallet for transactions - can be &#34;yes&#34;, &#34;no&#34; or &#34;whenkeyisnew&#34;
 3. startHeight        (numeric, optional, default=0) Block height to start rescan from
 
-Note: This call can take minutes to complete if rescan is true.
+Note: This call can take a long time to complete if rescan is true. Import of Unified viewing keys is not yet supported.
 
 Result:
 {
-  &#34;type&#34; : &#34;xxxx&#34;,                         (string) &#34;sprout&#34; or &#34;sapling&#34;
+  &#34;address_type&#34; : &#34;xxxx&#34;,                 (string) &#34;sprout&#34; or &#34;sapling&#34;
+  &#34;type&#34; : &#34;xxxx&#34;,                         (string) &#34;sprout&#34; or &#34;sapling&#34; (DEPRECATED, legacy attribute)
   &#34;address&#34; : &#34;address|DefaultAddress&#34;,    (string) The address corresponding to the viewing key (for Sapling, this is the default address).
 }
 
@@ -467,6 +468,9 @@ As a JSON-RPC call
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
+                  <a href="walletconfirmbackup.html">walletconfirmbackup</a>
+                  <br>
+                
                   <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
@@ -476,10 +480,22 @@ As a JSON-RPC call
                   <a href="z_exportwallet.html">z_exportwallet</a>
                   <br>
                 
+                  <a href="z_getaddressforaccount.html">z_getaddressforaccount</a>
+                  <br>
+                
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getbalanceforaccount.html">z_getbalanceforaccount</a>
+                  <br>
+                
+                  <a href="z_getbalanceforviewingkey.html">z_getbalanceforviewingkey</a>
+                  <br>
+                
                   <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
+                  <a href="z_getnewaccount.html">z_getnewaccount</a>
                   <br>
                 
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
@@ -506,6 +522,9 @@ As a JSON-RPC call
                   <a href="z_importwallet.html">z_importwallet</a>
                   <br>
                 
+                  <a href="z_listaccounts.html">z_listaccounts</a>
+                  <br>
+                
                   <a href="z_listaddresses.html">z_listaddresses</a>
                   <br>
                 
@@ -513,6 +532,9 @@ As a JSON-RPC call
                   <br>
                 
                   <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunifiedreceivers.html">z_listunifiedreceivers</a>
                   <br>
                 
                   <a href="z_listunspent.html">z_listunspent</a>

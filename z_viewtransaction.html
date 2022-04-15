@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - z_viewtransaction">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - z_viewtransaction">
     <meta name="author" content="">
 
-    <title>z_viewtransaction - Zcash 4.5.1-1 RPC Docs</title>
+    <title>z_viewtransaction - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.5.1-1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.7.0 RPC Docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_viewtransaction - Zcash 4.5.1-1 RPC</h1>
+            <h1>z_viewtransaction - Zcash 4.7.0 RPC</h1>
           
             <pre>z_viewtransaction &#34;txid&#34;
 
@@ -46,14 +46,16 @@ Result:
   &#34;txid&#34; : &#34;transactionid&#34;,   (string) The transaction id
   &#34;spends&#34; : [
     {
-      &#34;type&#34; : &#34;sprout|sapling&#34;,      (string) The type of address
-      &#34;js&#34; : n,                       (numeric, sprout) the index of the JSDescription within vJoinSplit
+      &#34;pool&#34; : &#34;sprout|sapling|orchard&#34;,      (string) The shielded value pool
+      &#34;type&#34; : &#34;sprout|sapling|orchard&#34;,      (string) The shielded value pool (DEPRECATED legacy attribute)      &#34;js&#34; : n,                       (numeric, sprout) the index of the JSDescription within vJoinSplit
       &#34;jsSpend&#34; : n,                  (numeric, sprout) the index of the spend within the JSDescription
       &#34;spend&#34; : n,                    (numeric, sapling) the index of the spend within vShieldedSpend
+      &#34;action&#34; : n,                   (numeric, orchard) the index of the action within orchard bundle
       &#34;txidPrev&#34; : &#34;transactionid&#34;,   (string) The id for the transaction this note was created in
       &#34;jsPrev&#34; : n,                   (numeric, sprout) the index of the JSDescription within vJoinSplit
       &#34;jsOutputPrev&#34; : n,             (numeric, sprout) the index of the output within the JSDescription
       &#34;outputPrev&#34; : n,               (numeric, sapling) the index of the output within the vShieldedOutput
+      &#34;actionPrev&#34; : n,               (numeric, orchard) the index of the action within the orchard bundle
       &#34;address&#34; : &#34;zcashaddress&#34;,     (string) The Zcash address involved in the transaction
       &#34;value&#34; : x.xxx                 (numeric) The amount in ZEC
       &#34;valueZat&#34; : xxxx               (numeric) The amount in zatoshis
@@ -62,15 +64,18 @@ Result:
   ],
   &#34;outputs&#34; : [
     {
-      &#34;type&#34; : &#34;sprout|sapling&#34;,      (string) The type of address
+      &#34;pool&#34; : &#34;sprout|sapling|orchard&#34;,      (string) The shielded value pool
+      &#34;type&#34; : &#34;sprout|sapling|orchard&#34;,      (string) The shielded value pool (DEPRECATED legacy attribute)
       &#34;js&#34; : n,                       (numeric, sprout) the index of the JSDescription within vJoinSplit
       &#34;jsOutput&#34; : n,                 (numeric, sprout) the index of the output within the JSDescription
       &#34;output&#34; : n,                   (numeric, sapling) the index of the output within the vShieldedOutput
-      &#34;address&#34; : &#34;zcashaddress&#34;,     (string) The Zcash address involved in the transaction
-      &#34;outgoing&#34; : true|false         (boolean, sapling) True if the output is not for an address in the wallet
+      &#34;action&#34; : n,                   (numeric, orchard) the index of the action within the orchard bundle
+      &#34;address&#34; : &#34;zcashaddress&#34;,     (string) The Zcash address involved in the transaction. Not included for change outputs.
+      &#34;outgoing&#34; : true|false         (boolean) True if the output is not for an address in the wallet
+      &#34;walletInternal&#34; : true|false   (boolean) True if this is a change output.
       &#34;value&#34; : x.xxx                 (numeric) The amount in ZEC
       &#34;valueZat&#34; : xxxx               (numeric) The amount in zatoshis
-      &#34;memo&#34; : &#34;hexmemo&#34;,             (string) Hexademical string representation of the memo field
+      &#34;memo&#34; : &#34;hexmemo&#34;,             (string) hexadecimal string representation of the memo field
       &#34;memoStr&#34; : &#34;memo&#34;,             (string) Only returned if memo contains valid UTF-8 text.
     }
     ,...
@@ -480,6 +485,9 @@ Examples:
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
+                  <a href="walletconfirmbackup.html">walletconfirmbackup</a>
+                  <br>
+                
                   <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
@@ -489,10 +497,22 @@ Examples:
                   <a href="z_exportwallet.html">z_exportwallet</a>
                   <br>
                 
+                  <a href="z_getaddressforaccount.html">z_getaddressforaccount</a>
+                  <br>
+                
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getbalanceforaccount.html">z_getbalanceforaccount</a>
+                  <br>
+                
+                  <a href="z_getbalanceforviewingkey.html">z_getbalanceforviewingkey</a>
+                  <br>
+                
                   <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
+                  <a href="z_getnewaccount.html">z_getnewaccount</a>
                   <br>
                 
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
@@ -519,6 +539,9 @@ Examples:
                   <a href="z_importwallet.html">z_importwallet</a>
                   <br>
                 
+                  <a href="z_listaccounts.html">z_listaccounts</a>
+                  <br>
+                
                   <a href="z_listaddresses.html">z_listaddresses</a>
                   <br>
                 
@@ -526,6 +549,9 @@ Examples:
                   <br>
                 
                   <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunifiedreceivers.html">z_listunifiedreceivers</a>
                   <br>
                 
                   <a href="z_listunspent.html">z_listunspent</a>
