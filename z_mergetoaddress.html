@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - z_mergetoaddress">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - z_mergetoaddress">
     <meta name="author" content="">
 
-    <title>z_mergetoaddress - Zcash 4.5.1-1 RPC Docs</title>
+    <title>z_mergetoaddress - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.5.1-1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.7.0 RPC Docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_mergetoaddress - Zcash 4.5.1-1 RPC</h1>
+            <h1>z_mergetoaddress - Zcash 4.7.0 RPC</h1>
           
             <pre>z_mergetoaddress [&#34;fromaddress&#34;, ... ] &#34;toaddress&#34; ( fee ) ( transparent_limit ) ( shielded_limit ) ( memo )
 
@@ -55,7 +55,7 @@ Arguments:
                              - &#34;ANY_SAPLING&#34;: Merge notes from any Sapling zaddrs belonging to the wallet.
                          While it is possible to use a variety of different combinations of addresses and the above values,
                          it is not possible to send funds from both sprout and sapling addresses simultaneously. If a special
-                         string is given, any given addresses of that type will be counted as duplicates and cause an error.
+                         string is given, any given addresses of that address type will be counted as duplicates and cause an error.
     [
       &#34;address&#34;          (string) Can be a taddr or a zaddr
       ,...
@@ -482,6 +482,9 @@ Examples:
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
+                  <a href="walletconfirmbackup.html">walletconfirmbackup</a>
+                  <br>
+                
                   <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
@@ -491,10 +494,22 @@ Examples:
                   <a href="z_exportwallet.html">z_exportwallet</a>
                   <br>
                 
+                  <a href="z_getaddressforaccount.html">z_getaddressforaccount</a>
+                  <br>
+                
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getbalanceforaccount.html">z_getbalanceforaccount</a>
+                  <br>
+                
+                  <a href="z_getbalanceforviewingkey.html">z_getbalanceforviewingkey</a>
+                  <br>
+                
                   <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
+                  <a href="z_getnewaccount.html">z_getnewaccount</a>
                   <br>
                 
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
@@ -521,6 +536,9 @@ Examples:
                   <a href="z_importwallet.html">z_importwallet</a>
                   <br>
                 
+                  <a href="z_listaccounts.html">z_listaccounts</a>
+                  <br>
+                
                   <a href="z_listaddresses.html">z_listaddresses</a>
                   <br>
                 
@@ -528,6 +546,9 @@ Examples:
                   <br>
                 
                   <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunifiedreceivers.html">z_listunifiedreceivers</a>
                   <br>
                 
                   <a href="z_listunspent.html">z_listunspent</a>

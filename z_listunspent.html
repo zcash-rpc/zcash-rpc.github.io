@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - z_listunspent">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - z_listunspent">
     <meta name="author" content="">
 
-    <title>z_listunspent - Zcash 4.5.1-1 RPC Docs</title>
+    <title>z_listunspent - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,47 +25,46 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.5.1-1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.7.0 RPC Docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_listunspent - Zcash 4.5.1-1 RPC</h1>
+            <h1>z_listunspent - Zcash 4.7.0 RPC</h1>
           
             <pre>z_listunspent ( minconf maxconf includeWatchonly [&#34;zaddr&#34;,...] )
 
 Returns array of unspent shielded notes with between minconf and maxconf (inclusive) confirmations.
 Optionally filter to only include notes sent to specified addresses.
 When minconf is 0, unspent notes with zero confirmations are returned, even though they are not immediately spendable.
-Results are an array of Objects, each of which has:
-{txid, jsindex, jsoutindex, confirmations, address, amount, memo} (Sprout)
-{txid, outindex, confirmations, address, amount, memo} (Sapling)
 
 Arguments:
 1. minconf          (numeric, optional, default=1) The minimum confirmations to filter
 2. maxconf          (numeric, optional, default=9999999) The maximum confirmations to filter
 3. includeWatchonly (bool, optional, default=false) Also include watchonly addresses (see &#39;z_importviewingkey&#39;)
-4. &#34;addresses&#34;      (string) A json array of zaddrs (both Sprout and Sapling) to filter on.  Duplicate addresses not allowed.
+4. &#34;addresses&#34;      (string) A json array of shielded addresses to filter on.  Duplicate addresses not allowed.
     [
-      &#34;address&#34;     (string) zaddr
+      &#34;address&#34;     (string) Sprout, Sapling, or Unified address
       ,...
     ]
 
-Result
+Result (output indices for only one value pool will be present):
 [                             (array of json object)
   {
-    &#34;txid&#34; : &#34;txid&#34;,          (string) the transaction id 
-    &#34;jsindex&#34; (sprout) : n,       (numeric) the joinsplit index
-    &#34;jsoutindex&#34; (sprout) : n,       (numeric) the output index of the joinsplit
-    &#34;outindex&#34; (sapling) : n,       (numeric) the output index
-    &#34;confirmations&#34; : n,       (numeric) the number of confirmations
-    &#34;spendable&#34; : true|false,  (boolean) true if note can be spent by wallet, false if address is watchonly
-    &#34;address&#34; : &#34;address&#34;,    (string) the shielded address
-    &#34;amount&#34;: xxxxx,          (numeric) the amount of value in the note
-    &#34;memo&#34;: xxxxx,            (string) hexademical string representation of memo field
-    &#34;change&#34;: true|false,     (boolean) true if the address that received the note is also one of the sending addresses
+    &#34;txid&#34; : &#34;txid&#34;,                   (string) the transaction id 
+    &#34;pool&#34; : &#34;sprout|sapling|orchard&#34;,   (string) The shielded value pool
+    &#34;jsindex&#34; (sprout) : n,            (numeric) the joinsplit index
+    &#34;jsoutindex&#34; (sprout) : n,         (numeric) the output index of the joinsplit
+    &#34;outindex&#34; (sapling, orchard) : n, (numeric) the Sapling output or Orchard action index
+    &#34;confirmations&#34; : n,               (numeric) the number of confirmations
+    &#34;spendable&#34; : true|false,          (boolean) true if note can be spent by wallet, false if address is watchonly
+    &#34;account&#34; : n,                     (numeric, optional) the unified account ID, if applicable
+    &#34;address&#34; : &#34;address&#34;,             (string, optional) the shielded address, omitted if this note was sent to an internal receiver
+    &#34;amount&#34;: xxxxx,                   (numeric) the amount of value in the note
+    &#34;memo&#34;: xxxxx,                     (string) hexadecimal string representation of memo field
+    &#34;change&#34;: true|false,              (boolean) true if the address that received the note is also one of the sending addresses
   }
   ,...
 ]
@@ -474,6 +473,9 @@ Examples
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
+                  <a href="walletconfirmbackup.html">walletconfirmbackup</a>
+                  <br>
+                
                   <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
@@ -483,10 +485,22 @@ Examples
                   <a href="z_exportwallet.html">z_exportwallet</a>
                   <br>
                 
+                  <a href="z_getaddressforaccount.html">z_getaddressforaccount</a>
+                  <br>
+                
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getbalanceforaccount.html">z_getbalanceforaccount</a>
+                  <br>
+                
+                  <a href="z_getbalanceforviewingkey.html">z_getbalanceforviewingkey</a>
+                  <br>
+                
                   <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
+                  <a href="z_getnewaccount.html">z_getnewaccount</a>
                   <br>
                 
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
@@ -513,6 +527,9 @@ Examples
                   <a href="z_importwallet.html">z_importwallet</a>
                   <br>
                 
+                  <a href="z_listaccounts.html">z_listaccounts</a>
+                  <br>
+                
                   <a href="z_listaddresses.html">z_listaddresses</a>
                   <br>
                 
@@ -520,6 +537,9 @@ Examples
                   <br>
                 
                   <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunifiedreceivers.html">z_listunifiedreceivers</a>
                   <br>
                 
                   <a href="z_listunspent.html">z_listunspent</a>

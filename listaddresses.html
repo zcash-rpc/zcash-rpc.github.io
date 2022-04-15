@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Zcash 4.5.1-1 RPC Docs - listaddresses">
+    <meta name="description" content="Zcash 4.7.0 RPC Docs - listaddresses">
     <meta name="author" content="">
 
-    <title>listaddresses - Zcash 4.5.1-1 RPC Docs</title>
+    <title>listaddresses - Zcash 4.7.0 RPC Docs</title>
 
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
@@ -25,14 +25,14 @@
 
 
     <nav class="navbar  navbar-dark bg-dark ">
-      <a class="navbar-brand" href="/">Zcash 4.5.1-1 RPC docs</a>
+      <a class="navbar-brand" href="/">Zcash 4.7.0 RPC Docs</a>
     </nav>
 
     <main role="main" class="container-fluid" style="margin-top: 1pc;">
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>listaddresses - Zcash 4.5.1-1 RPC</h1>
+            <h1>listaddresses - Zcash 4.7.0 RPC</h1>
           
             <pre>listaddresses
 
@@ -41,7 +41,7 @@ those generated from randomness by this wallet, Sapling addresses
 generated from the legacy HD seed, imported watchonly transparent 
 addresses, shielded addresses tracked using imported viewing keys, 
 and addresses derived from the wallet&#39;s mnemonic seed for releases 
-version 4.5.2 and above. 
+version 4.7.0 and above. 
 
 REMINDER: It is recommended that you back up your wallet.dat file 
 regularly!
@@ -49,7 +49,7 @@ regularly!
 Result:
 [
   {
-    &#34;source&#34;: &#34;imported|imported_watchonly|keypool|legacy_seed|mnemonic_seed&#34;
+    &#34;source&#34;: &#34;imported|imported_watchonly|legacy_random|legacy_seed|mnemonic_seed&#34;
     &#34;transparent&#34;: {
       &#34;addresses&#34;: [&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1&#34;, ...],
       &#34;changeAddresses&#34;: [&#34;t14oHp2v54vfmdgQ3v3SNuQga8JKHTNi2a1&#34;, ...]
@@ -59,18 +59,37 @@ Result:
     },
     &#34;sapling&#34;: [ -- each element in this list represents a set of diversified addresses derived from a single IVK. 
       {
-        &#34;zip32AccountId&#34;: 0, -- optional field, not present for imported/watchonly sources,
+        &#34;zip32KeyPath&#34;: &#34;m/32&#39;/133&#39;/0&#39;&#34;, -- optional field, not present for imported/watchonly sources,
         &#34;addresses&#34;: [
-          &#34;ztbx5DLDxa5ZLFTchHhoPNkKs57QzSyib6UqXpEdy76T1aUdFxJt1w9318Z8DJ73XzbnWHKEZP9Yjg712N5kMmP4QzS9iC9&#34;,
+          &#34;zs1z7rejlpsa98s2rrrfkwmaxu53e4ue0ulcrw0h4x5g8jl04tak0d3mm47vdtahatqrlkngh9slya&#34;,
           ...
         ]
       },
       ...
-    ]
+    ],
+    &#34;unified&#34;: [ -- each element in this list represents a set of diversified Unified Addresses derived from a single UFVK.
+      {
+        &#34;account&#34;: 0,
+        &#34;seedfp&#34;: &#34;hexstring&#34;,
+        &#34;addresses&#34;: [
+          {
+            &#34;diversifier_index&#34;: 0,
+            &#34;receiver_types&#34;: [
+              &#34;sapling&#34;,
+               ...
+            ],
+            &#34;address&#34;: &#34;...&#34;
+          },
+          ...
+        ]
+      },
+      ...
+    ],
+    ...
   },
   ...
 ]
-In the case that a source does not have addresses for a pool, the key
+In the case that a source does not have addresses for a value pool, the key
 associated with that pool will be absent.
 
 Examples:
@@ -476,6 +495,9 @@ Examples:
                   <a href="signmessage.html">signmessage</a>
                   <br>
                 
+                  <a href="walletconfirmbackup.html">walletconfirmbackup</a>
+                  <br>
+                
                   <a href="z_exportkey.html">z_exportkey</a>
                   <br>
                 
@@ -485,10 +507,22 @@ Examples:
                   <a href="z_exportwallet.html">z_exportwallet</a>
                   <br>
                 
+                  <a href="z_getaddressforaccount.html">z_getaddressforaccount</a>
+                  <br>
+                
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
+                  <a href="z_getbalanceforaccount.html">z_getbalanceforaccount</a>
+                  <br>
+                
+                  <a href="z_getbalanceforviewingkey.html">z_getbalanceforviewingkey</a>
+                  <br>
+                
                   <a href="z_getmigrationstatus.html">z_getmigrationstatus</a>
+                  <br>
+                
+                  <a href="z_getnewaccount.html">z_getnewaccount</a>
                   <br>
                 
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
@@ -515,6 +549,9 @@ Examples:
                   <a href="z_importwallet.html">z_importwallet</a>
                   <br>
                 
+                  <a href="z_listaccounts.html">z_listaccounts</a>
+                  <br>
+                
                   <a href="z_listaddresses.html">z_listaddresses</a>
                   <br>
                 
@@ -522,6 +559,9 @@ Examples:
                   <br>
                 
                   <a href="z_listreceivedbyaddress.html">z_listreceivedbyaddress</a>
+                  <br>
+                
+                  <a href="z_listunifiedreceivers.html">z_listunifiedreceivers</a>
                   <br>
                 
                   <a href="z_listunspent.html">z_listunspent</a>
